@@ -1,0 +1,89 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@fontsource-variable/outfit";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+    --background: oklch(0.98 0 0);
+    --foreground: oklch(0.12 0 0);
+    --card: oklch(0.96 0.005 350);
+    --card-foreground: oklch(0.12 0 0);
+    --muted: oklch(0.94 0 0);
+    --muted-foreground: oklch(0.45 0 0);
+    --border: oklch(0.88 0.02 350);
+    --primary: oklch(0.65 0.28 350);
+    --primary-foreground: oklch(0.98 0 0);
+    --accent: oklch(0.75 0.20 320);
+    --accent-foreground: oklch(0.12 0 0);
+    --radius: 1rem;
+}
+
+.dark {
+    --background: oklch(0.06 0.01 300);
+    --foreground: oklch(0.95 0 0);
+    --card: oklch(0.11 0.02 320);
+    --card-foreground: oklch(0.95 0 0);
+    --muted: oklch(0.16 0.01 320);
+    --muted-foreground: oklch(0.60 0 0);
+    --border: oklch(0.22 0.03 330);
+    --primary: oklch(0.72 0.28 350);
+    --primary-foreground: oklch(0.06 0 0);
+    --accent: oklch(0.80 0.22 320);
+    --accent-foreground: oklch(0.06 0 0);
+}
+
+@theme inline {
+    --font-sans: 'Outfit Variable', -apple-system, BlinkMacSystemFont, sans-serif;
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-border: var(--border);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --radius-2xl: calc(var(--radius) + 8px);
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    html {
+        @apply antialiased scroll-smooth;
+    }
+    body {
+        @apply font-sans bg-background text-foreground;
+        background-image:
+            radial-gradient(ellipse 80% 50% at 50% -20%, oklch(0.72 0.28 350 / 0.12), transparent),
+            radial-gradient(ellipse 50% 30% at 80% 80%, oklch(0.80 0.22 320 / 0.08), transparent);
+        background-attachment: fixed;
+    }
+    ::selection {
+        @apply bg-primary/30 text-foreground;
+    }
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+    .noise {
+        position: relative;
+    }
+    .noise::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        opacity: 0.025;
+        pointer-events: none;
+        mix-blend-mode: overlay;
+    }
+}
