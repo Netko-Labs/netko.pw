@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { GitHubData, MainContributor, RepoData } from '@/types'
 
-const ORG_NAME = 'n3tko'
+const ORG_NAME = 'Netko-Labs'
 const MAIN_CONTRIBUTOR = 'pejedev'
 
 export function useGitHubData() {

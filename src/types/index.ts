@@ -34,12 +34,10 @@ export interface MainContributor {
 
 export interface TechStackItem {
   name: string
-  icon: React.ComponentType<{ size?: number; className?: string }>
   color: string
 }
 
 export interface FunnyMetric {
-  icon: React.ComponentType<{ size?: number; className?: string }>
   value: string
   label: string
   color: string

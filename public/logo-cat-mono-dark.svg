@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
+  <rect width="340" height="340" rx="24" fill="#0a0a0a"/>
+  <style>
+    text {
+      font-family: 'Courier New', 'Courier', 'Lucida Console', monospace;
+      font-size: 72px;
+      font-weight: bold;
+      fill: #e0e0e0;
+      white-space: pre;
+    }
+  </style>
+  <text x="50%" y="110" text-anchor="middle" xml:space="preserve">/\_/\</text>
+  <text x="50%" y="195" text-anchor="middle" xml:space="preserve">( &gt;.o )</text>
+  <text x="50%" y="280" text-anchor="middle" xml:space="preserve"> &gt; w &lt; </text>
+</svg>
