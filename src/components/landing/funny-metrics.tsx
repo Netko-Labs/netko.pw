@@ -5,39 +5,31 @@ export function FunnyMetrics() {
   return (
     <motion.div
       variants={itemVariants}
-      className="col-span-2 p-4 rounded-2xl bg-card border border-border relative overflow-hidden"
+      className="col-span-2 border border-border hover:border-foreground/30 hover:border-glow transition-all duration-200"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-primary/5" />
-      <div className="relative z-10">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Made with</span>
-          <motion.span
-            animate={{ rotate: [0, 14, -8, 14, 0] }}
-            transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 3 }}
-          >
-            🫠
-          </motion.span>
-        </div>
-        <div className="grid grid-cols-2 gap-2">
+      <div className="border-b border-border px-3 py-1 bg-[var(--title-bar)]">
+        <span className="text-[10px] text-muted-foreground">
+          <span className="text-accent">$</span> cat /dev/human/metrics
+        </span>
+      </div>
+      <div className="px-4 py-3">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
           {funnyMetrics.map((metric, i) => (
             <motion.div
               key={metric.label}
-              initial={{ opacity: 0, x: -10 }}
+              initial={{ opacity: 0, x: -6 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5 + i * 0.1 }}
-              whileHover={{ scale: 1.02 }}
-              className="flex items-center gap-2 p-2 rounded-xl bg-muted/30"
+              transition={{ delay: 0.4 + i * 0.08 }}
+              className="flex items-center justify-between text-[11px] py-0.5 border-b border-border/30 last:border-0"
             >
-              <motion.div
-                animate={metric.label === 'cups of coffee' ? { rotate: [0, -10, 10, 0] } : {}}
-                transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 2 }}
+              <span className="text-muted-foreground">{metric.label}</span>
+              <motion.span
+                className="font-bold tabular-nums"
+                style={{ color: metric.color, textShadow: `0 0 6px ${metric.color}40` }}
+                whileHover={{ scale: 1.2 }}
               >
-                <metric.icon size={16} className={metric.color} />
-              </motion.div>
-              <div className="flex-1 min-w-0">
-                <p className={`text-sm font-bold ${metric.color}`}>{metric.value}</p>
-                <p className="text-[9px] text-muted-foreground truncate">{metric.label}</p>
-              </div>
+                {metric.value}
+              </motion.span>
             </motion.div>
           ))}
         </div>

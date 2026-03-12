@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { IconCode, IconStar } from '@tabler/icons-react'
+import { useState, useEffect } from 'react'
 import { itemVariants } from './constants'
 import type { GitHubData } from '@/types'
 
@@ -8,58 +8,63 @@ interface StatsCardsProps {
   loading: boolean
 }
 
+function AnimatedNumber({ value, loading }: { value: number; loading: boolean }) {
+  const [display, setDisplay] = useState(0)
+
+  useEffect(() => {
+    if (loading || value === 0) return
+    let current = 0
+    const step = Math.max(1, Math.floor(value / 20))
+    const interval = setInterval(() => {
+      current = Math.min(current + step, value)
+      setDisplay(current)
+      if (current >= value) clearInterval(interval)
+    }, 40)
+    return () => clearInterval(interval)
+  }, [value, loading])
+
+  if (loading) return <span className="text-muted-foreground cursor-blink">_</span>
+  return <>{display}</>
+}
+
 export function StatsCards({ githubData, loading }: StatsCardsProps) {
   return (
     <>
       <motion.div
         variants={itemVariants}
-        whileHover={{ scale: 1.02 }}
-        className="p-4 rounded-2xl bg-card border border-border relative overflow-hidden group"
+        whileHover={{ x: 3 }}
+        className="border border-border hover:border-foreground/30 hover:border-glow transition-all duration-200 glitch-hover"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-        <div className="relative z-10">
-          <div className="flex items-center gap-1.5 text-muted-foreground mb-2">
-            <IconCode size={14} />
-            <span className="text-[10px] font-medium uppercase tracking-wider">Repos</span>
+        <div className="border-b border-border px-3 py-1 bg-[var(--title-bar)]">
+          <span className="text-[10px] text-muted-foreground">repos.count</span>
+        </div>
+        <div className="px-4 py-3">
+          <div className="text-[9px] text-muted-foreground mb-1.5">
+            <span className="text-accent">$</span> wc -l repos/
           </div>
-          <motion.p
-            className="text-3xl font-bold text-primary"
-            initial={{ scale: 1 }}
-            whileHover={{ scale: 1.1 }}
-          >
-            {loading ? (
-              <span className="inline-block w-8 h-8 bg-muted/50 rounded animate-pulse" />
-            ) : (
-              githubData?.publicRepos ?? 2
-            )}
-          </motion.p>
-          <p className="text-muted-foreground text-[10px] mt-0.5">public projects</p>
+          <p className="text-2xl font-bold text-foreground text-glow tabular-nums">
+            <AnimatedNumber value={githubData?.publicRepos ?? 2} loading={loading} />
+          </p>
+          <p className="text-[9px] text-muted-foreground mt-1">public_repos</p>
         </div>
       </motion.div>
 
       <motion.div
         variants={itemVariants}
-        whileHover={{ scale: 1.02 }}
-        className="p-4 rounded-2xl bg-card border border-border relative overflow-hidden group"
+        whileHover={{ x: 3 }}
+        className="border border-border hover:border-foreground/30 hover:border-glow transition-all duration-200 glitch-hover"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-        <div className="relative z-10">
-          <div className="flex items-center gap-1.5 text-muted-foreground mb-2">
-            <IconStar size={14} className="text-yellow-500" />
-            <span className="text-[10px] font-medium uppercase tracking-wider">Stars</span>
+        <div className="border-b border-border px-3 py-1 bg-[var(--title-bar)]">
+          <span className="text-[10px] text-muted-foreground">stars.total</span>
+        </div>
+        <div className="px-4 py-3">
+          <div className="text-[9px] text-muted-foreground mb-1.5">
+            <span className="text-accent">$</span> gh api /stars
           </div>
-          <motion.p
-            className="text-3xl font-bold text-yellow-500"
-            initial={{ scale: 1 }}
-            whileHover={{ scale: 1.1 }}
-          >
-            {loading ? (
-              <span className="inline-block w-8 h-8 bg-muted/50 rounded animate-pulse" />
-            ) : (
-              githubData?.totalStars ?? 0
-            )}
-          </motion.p>
-          <p className="text-muted-foreground text-[10px] mt-0.5">total stars</p>
+          <p className="text-2xl font-bold text-accent text-glow-accent tabular-nums">
+            <AnimatedNumber value={githubData?.totalStars ?? 0} loading={loading} />
+          </p>
+          <p className="text-[9px] text-muted-foreground mt-1">total_stars</p>
         </div>
       </motion.div>
     </>
