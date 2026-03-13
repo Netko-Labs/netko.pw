@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'motion/react'
 import { useGitHubData } from '@/hooks/use-github-data'
 import { useTheme } from '@/hooks/use-theme'
+import { trackEvent } from '@/hooks/use-umami'
 import {
   BootSequence,
   FloatingElements,
@@ -32,7 +33,7 @@ export function LandingPage() {
 
   return (
     <>
-      {!booted && <BootSequence onComplete={() => setBooted(true)} />}
+      {!booted && <BootSequence onComplete={() => { setBooted(true); trackEvent('boot-complete') }} />}
 
       <div className="min-h-screen scanlines crt-flicker noise overflow-hidden flex flex-col">
         <FloatingElements />

@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { itemVariants } from './constants'
+import { trackEvent } from '@/hooks/use-umami'
 import type { GitHubData } from '@/types'
 
 interface HeaderProps {
@@ -28,7 +29,7 @@ export function Header({ githubData, onToggleTheme, theme }: HeaderProps) {
         </div>
         <div className="flex items-center gap-3">
           <button
-            onClick={onToggleTheme}
+            onClick={() => { onToggleTheme(); trackEvent('theme-toggle', { to: theme === 'dark' ? 'light' : 'dark' }) }}
             className="text-[10px] text-muted-foreground hover:text-foreground transition-colors"
           >
             [{theme === 'dark' ? 'LIGHT' : 'DARK'}]
@@ -39,6 +40,7 @@ export function Header({ githubData, onToggleTheme, theme }: HeaderProps) {
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-[10px] text-muted-foreground hover:text-foreground transition-colors glitch-hover"
             whileHover={{ x: 2 }}
+            onClick={() => trackEvent('github-link-click')}
           >
             <span>github.com/Netko-Labs</span>
             {githubData && (

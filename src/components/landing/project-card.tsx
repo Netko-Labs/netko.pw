@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { itemVariants, languageColors } from './constants'
+import { trackEvent } from '@/hooks/use-umami'
 import type { RepoData } from '@/types'
 
 interface ProjectCardProps {
@@ -27,6 +28,7 @@ export function ProjectCard({
       href={repo?.url || fallbackUrl}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => trackEvent('project-click', { name, stars: repo?.stars ?? 0 })}
       whileHover={{ x: 3 }}
       className={`${isSmall ? 'col-span-2 lg:col-span-1' : 'col-span-2'} border border-border hover:border-foreground/30 hover:border-glow transition-all duration-200 group relative overflow-hidden glitch-hover`}
     >

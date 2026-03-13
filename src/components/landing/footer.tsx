@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { itemVariants } from './constants'
+import { trackEvent } from '@/hooks/use-umami'
 
 export function Footer() {
   return (
@@ -20,6 +21,7 @@ export function Footer() {
             rel="noopener noreferrer"
             className="hover:text-foreground transition-colors text-glow"
             whileHover={{ x: 2 }}
+            onClick={() => trackEvent('footer-link', { target: 'github' })}
           >
             [github]
           </motion.a>
@@ -29,6 +31,7 @@ export function Footer() {
             rel="noopener noreferrer"
             className="hover:text-foreground transition-colors text-glow"
             whileHover={{ x: 2 }}
+            onClick={() => trackEvent('footer-link', { target: 'twitter' })}
           >
             [@pejedev]
           </motion.a>

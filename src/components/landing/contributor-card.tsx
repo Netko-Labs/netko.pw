@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { useState, useEffect } from 'react'
 import { itemVariants, smallCatAscii, smallCatBlinkAscii } from './constants'
+import { trackEvent } from '@/hooks/use-umami'
 import type { MainContributor } from '@/types'
 
 interface ContributorCardProps {
@@ -24,6 +25,7 @@ export function ContributorCard({ contributor }: ContributorCardProps) {
       href={contributor?.url || 'https://github.com/pejedev'}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => trackEvent('contributor-click', { name: contributor?.name ?? 'pejedev' })}
       whileHover={{ x: 3 }}
       className="col-span-2 border border-border hover:border-foreground/30 hover:border-glow transition-all duration-200 group glitch-hover"
     >
