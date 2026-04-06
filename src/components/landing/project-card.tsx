@@ -5,6 +5,7 @@ import type { RepoData } from '@/types'
 
 interface ProjectCardProps {
   repo: RepoData | undefined
+  name: string
   fallbackUrl: string
   fallbackDescription: string
   fallbackTags: string[]
@@ -13,12 +14,13 @@ interface ProjectCardProps {
 
 export function ProjectCard({
   repo,
+  name,
   fallbackUrl,
   fallbackDescription,
   fallbackTags,
   size = 'large',
 }: ProjectCardProps) {
-  const name = repo?.name || fallbackUrl.split('/').pop() || 'unknown'
+  const repoSlug = repo?.name || fallbackUrl.split('/').pop() || 'unknown'
   const description = repo?.description || fallbackDescription
   const isSmall = size === 'small'
 
@@ -28,13 +30,13 @@ export function ProjectCard({
       href={repo?.url || fallbackUrl}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() => trackEvent('project-click', { name, stars: repo?.stars ?? 0 })}
+      onClick={() => trackEvent('project-click', { name: repoSlug, stars: repo?.stars ?? 0 })}
       whileHover={{ x: 3 }}
       className={`${isSmall ? 'col-span-2 lg:col-span-1' : 'col-span-2'} border border-border hover:border-foreground/30 hover:border-glow transition-all duration-200 group relative overflow-hidden glitch-hover`}
     >
       <div className="border-b border-border px-3 py-1 flex items-center justify-between bg-[var(--title-bar)]">
         <span className="text-[10px] text-muted-foreground">
-          Netko-Labs/{name}
+          Netko-Labs/{repoSlug}
         </span>
         <div className="flex items-center gap-2">
           {repo?.language && (
