@@ -53,6 +53,7 @@ export function LandingPage() {
 
                 <ProjectCard
                   repo={covenoteRepo}
+                  name={projects.covenote.name}
                   fallbackUrl={`https://github.com/Netko-Labs/${projects.covenote.name.toLowerCase()}`}
                   fallbackDescription={projects.covenote.fallbackDescription}
                   fallbackTags={projects.covenote.fallbackTags}
@@ -60,6 +61,7 @@ export function LandingPage() {
 
                 <ProjectCard
                   repo={ankoRepo}
+                  name={projects.anko.name}
                   fallbackUrl={`https://github.com/Netko-Labs/${projects.anko.name.toLowerCase()}`}
                   fallbackDescription={projects.anko.fallbackDescription}
                   fallbackTags={projects.anko.fallbackTags}
@@ -67,6 +69,7 @@ export function LandingPage() {
 
                 <ProjectCard
                   repo={codeWhiskersRepo}
+                  name={projects['code-whiskers'].name}
                   fallbackUrl="https://github.com/Netko-Labs/code-whiskers"
                   fallbackDescription={projects['code-whiskers'].fallbackDescription}
                   fallbackTags={projects['code-whiskers'].fallbackTags}
@@ -75,6 +78,7 @@ export function LandingPage() {
 
                 <ProjectCard
                   repo={mizuRepo}
+                  name={projects.mizu.name}
                   fallbackUrl="https://github.com/Netko-Labs/mizu"
                   fallbackDescription={projects.mizu.fallbackDescription}
                   fallbackTags={projects.mizu.fallbackTags}
