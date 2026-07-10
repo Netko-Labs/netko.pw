@@ -1,27 +1,37 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { interfaceProfiles } from '@/components/landing/profiles'
+import type { InterfaceProfile } from '@/types'
 
-type Theme = 'dark' | 'light'
+const STORAGE_KEY = 'netko-interface-profile-v4'
+const profileIds = new Set(interfaceProfiles.map((profile) => profile.id))
+
+function getStoredProfile(): InterfaceProfile {
+  if (typeof window === 'undefined') return 'zine'
+
+  const stored = window.localStorage.getItem(STORAGE_KEY)
+  return profileIds.has(stored as InterfaceProfile) ? (stored as InterfaceProfile) : 'zine'
+}
 
 export function useTheme() {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    if (typeof window === 'undefined') return 'dark'
-    const stored = localStorage.getItem('netko-theme') as Theme | null
-    return stored || 'dark'
-  })
+  const [profile, setProfileState] = useState<InterfaceProfile>(getStoredProfile)
 
   useEffect(() => {
+    const selected = interfaceProfiles.find((item) => item.id === profile)
     const root = document.documentElement
-    if (theme === 'light') {
-      root.classList.add('light')
-    } else {
-      root.classList.remove('light')
-    }
-    localStorage.setItem('netko-theme', theme)
-  }, [theme])
 
-  const toggleTheme = useCallback(() => {
-    setThemeState(t => (t === 'dark' ? 'light' : 'dark'))
+    root.dataset.profile = profile
+    root.classList.toggle('dark', selected?.dark ?? true)
+    root.classList.toggle('light', !(selected?.dark ?? true))
+    root.style.colorScheme = selected?.dark ? 'dark' : 'light'
+    window.localStorage.setItem(STORAGE_KEY, profile)
+
+    const themeMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
+    themeMeta?.setAttribute('content', selected?.dark ? '#000000' : '#f2f0e9')
+  }, [profile])
+
+  const setProfile = useCallback((nextProfile: InterfaceProfile) => {
+    setProfileState(nextProfile)
   }, [])
 
-  return { theme, toggleTheme }
+  return { profile, setProfile }
 }
