@@ -1,13 +1,13 @@
-import { BRAND, PALETTE } from '../tokens';
-import { lockup, mark, pixelMark, sectionHead } from './art';
-import { TAGLINE } from './sections-identity';
-import { BANNER, toHtml } from '../ascii';
+import { BANNER, toHtml } from '../ascii'
+import { BRAND, PALETTE } from '../tokens'
+import { lockup, mark, pixelMark, sectionHead } from './art'
+import { TAGLINE } from './sections-identity'
 
 const asciiBlock = (html: string, label: string, isLight = false) => `
   <figure class="ascii-figure${isLight ? ' is-light' : ''}">
     <pre class="ascii" aria-label="${label}">${html}</pre>
     <figcaption class="caption">${label}</figcaption>
-  </figure>`;
+  </figure>`
 
 const KIT = [
   { path: 'kit/logo/netko-mark-*.svg|png', note: 'mark · duo/mono × ink/paper' },
@@ -21,14 +21,14 @@ const KIT = [
   { path: 'kit/social/github-avatar.png', note: '500 × 500 org avatar' },
   { path: 'fonts/*.woff2', note: 'Departure Mono, M PLUS Rounded 1c (OFL)' },
   { path: 'scripts/build-guidelines.ts', note: 'regenerates all of the above' },
-];
+]
 
 const browserTab = (dark: boolean) => `
   <div style="background:${dark ? PALETTE.sumi : '#DCD8E6'};padding:10px 10px 0;border-radius:6px 6px 0 0">
     <div style="display:inline-flex;align-items:center;gap:8px;background:${dark ? PALETTE.yoru : '#fff'};color:${dark ? PALETTE.kami : PALETTE.sumi};padding:8px 14px;border-radius:6px 6px 0 0;font-size:13px">
       ${pixelMark(dark ? 'paper' : 'ink', 16)}<span>netko · open-source tools</span>
     </div>
-  </div>`;
+  </div>`
 
 export const appsSection = (ogCardDataUri: string) => `
   <section id="applications">
@@ -77,4 +77,4 @@ export const appsSection = (ogCardDataUri: string) => `
     <ul class="kit">${KIT.map((k) => `<li><code>brand/${k.path}</code><span>${k.note}</span></li>`).join('')}</ul>
     <pre class="term" style="margin-top:24px"><span class="p">$</span> bun brand/scripts/build-guidelines.ts
 <span class="ok">✓</span> <span class="m">kit + guidelines regenerated</span></pre>
-  </section>`;
+  </section>`

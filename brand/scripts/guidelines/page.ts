@@ -1,12 +1,12 @@
-import type { SheetFonts } from '../types';
-import { mark } from './art';
-import { appsSection } from './sections-apps';
-import { characterSections } from './sections-character';
-import { colorSection } from './sections-color';
-import { essenceSection, heroSection, TAGLINE } from './sections-identity';
-import { logoSections } from './sections-logo';
-import { typeSection, voiceSection } from './sections-voice';
-import { renderStyles } from './styles';
+import type { SheetFonts } from '../types'
+import { mark } from './art'
+import { appsSection } from './sections-apps'
+import { characterSections } from './sections-character'
+import { colorSection } from './sections-color'
+import { essenceSection, heroSection, TAGLINE } from './sections-identity'
+import { logoSections } from './sections-logo'
+import { typeSection, voiceSection } from './sections-voice'
+import { renderStyles } from './styles'
 
 const NAV = [
   { heading: 'identity', items: [['essence', 'Essence']] },
@@ -43,7 +43,7 @@ const NAV = [
       ['kit', 'Kit'],
     ],
   },
-];
+]
 
 const nav = () => `
   <nav aria-label="Sections">
@@ -53,7 +53,7 @@ const nav = () => `
       <h4>${group.heading}</h4>
       <ul>${group.items.map(([id, label]) => `<li><a href="#${id}">${label}</a></li>`).join('')}</ul>`,
     ).join('')}
-  </nav>`;
+  </nav>`
 
 export const renderGuidelines = (fonts: SheetFonts, ogCardDataUri: string) => `<!doctype html>
 <html lang="en">
@@ -80,4 +80,4 @@ export const renderGuidelines = (fonts: SheetFonts, ogCardDataUri: string) => `<
   </main>
 </div>
 </body>
-</html>`;
+</html>`

@@ -1,9 +1,9 @@
-import { BRAND, PALETTE } from '../tokens';
-import type { SheetFonts } from '../types';
-import { lockup, mark } from './art';
-import { TAGLINE } from './sections-identity';
+import { BRAND, PALETTE } from '../tokens'
+import type { SheetFonts } from '../types'
+import { lockup, mark } from './art'
+import { TAGLINE } from './sections-identity'
 
-export const OG_SIZE = { width: 1200, height: 630 };
+export const OG_SIZE = { width: 1200, height: 630 }
 
 export const renderOgCard = (fonts: SheetFonts) => `<!doctype html>
 <html><head><meta charset="utf-8"><style>
@@ -21,4 +21,4 @@ small b { color: ${PALETTE.sakura}; font-weight: 400; }
   <div class="mark">${mark('paper', 'duo', 360)}</div>
   <div>${lockup('wordmark', 'paper', 480)}<p>${TAGLINE}</p></div>
   <small><b>$</b> open ${BRAND.url}</small>
-</body></html>`;
+</body></html>`

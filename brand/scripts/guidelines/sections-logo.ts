@@ -1,9 +1,9 @@
-import { PALETTE } from '../tokens';
-import { lockup, mark, pixelMark, sectionHead } from './art';
+import { PALETTE } from '../tokens'
+import { lockup, mark, pixelMark, sectionHead } from './art'
 
 const GRID_LINES = Array.from({ length: 17 }, (_, i) => i * 16)
   .map((p) => `<path d="M${p} 0V256M0 ${p}H256"/>`)
-  .join('');
+  .join('')
 
 const construction = () => `
   <svg viewBox="-8 -8 272 272" width="420" height="420" role="img" aria-label="Construction grid">
@@ -14,7 +14,7 @@ const construction = () => `
       <rect x="145" y="123" width="44" height="44"/>
       <path d="M56 24V72M200 24V72M56 204V240M104 204V222"/>
     </g>
-  </svg>`;
+  </svg>`
 
 const CONSTRUCTION_NOTES = [
   'Body: 208 × 140 on a 256 grid, corner radius 14. Corners stay nearly square, never pill-shaped.',
@@ -22,7 +22,7 @@ const CONSTRUCTION_NOTES = [
   'Eye: a 30-unit square ring with a 14-unit stroke. That stroke is the brand’s “pixel”.',
   'Tail: two 18-unit steps, left-aligned at x = 56. It steps, it never curves.',
   'Face: 18-unit strokes with square caps and miter joins. No rounded ends anywhere in the mark.',
-];
+]
 
 const clearSpace = () => `
   <svg viewBox="-48 -48 352 352" width="300" height="300" role="img" aria-label="Clear space">
@@ -30,7 +30,7 @@ const clearSpace = () => `
     <rect x="24" y="21" width="208" height="219" fill="none" stroke="${PALETTE.fog}" stroke-opacity=".5" stroke-width="1"/>
     ${mark('ink', 'duo', 256).replace('<svg ', '<svg x="0" y="0" ')}
     <rect x="-6" y="-9" width="30" height="30" fill="${PALETTE.sakura}" fill-opacity=".25"/>
-  </svg>`;
+  </svg>`
 
 const VERSIONS = [
   { cls: 'on-paper', svg: () => mark('ink', 'duo'), label: 'primary · duo ink on kami' },
@@ -39,7 +39,7 @@ const VERSIONS = [
   { cls: 'on-paper', svg: () => mark('ink', 'mono'), label: 'mono sumi · one-color print' },
   { cls: 'on-sumi', svg: () => mark('paper', 'mono'), label: 'mono kami · dark one-color' },
   { cls: 'on-sakura', svg: () => mark('ink', 'mono'), label: 'mono sumi on sakura · stickers' },
-];
+]
 
 const MISUSE = [
   { style: 'transform:rotate(-14deg)', svg: () => mark('ink'), label: 'don’t rotate or tilt' },
@@ -50,7 +50,7 @@ const MISUSE = [
     label: 'don’t recolor the eye',
   },
   {
-    style: `filter:drop-shadow(10px 12px 4px rgb(27 23 36 / .45))`,
+    style: 'filter:drop-shadow(10px 12px 4px rgb(27 23 36 / .45))',
     svg: () => mark('ink'),
     label: 'no shadows, glows or bevels',
   },
@@ -61,7 +61,7 @@ const MISUSE = [
     label: 'don’t place it on busy patterns',
     bg: `background:repeating-linear-gradient(45deg, ${PALETTE.sakura} 0 14px, ${PALETTE.matcha} 14px 28px)`,
   },
-];
+]
 
 export const logoSections = () => `
   <section id="mark">
@@ -124,4 +124,4 @@ export const logoSections = () => `
     <div class="grid cols-3">
       ${MISUSE.map((m) => `<div class="tile on-paper dont" style="${m.bg ?? ''}"><div style="${m.style}">${m.svg()}</div><span class="label" style="${m.bg ? `background:${PALETTE.kami};padding:0 6px` : ''}">${m.label}</span></div>`).join('')}
     </div>
-  </section>`;
+  </section>`

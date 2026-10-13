@@ -1,10 +1,10 @@
-import { CONCEPTS } from './concepts';
-import type { SheetSpec } from './types';
-import { CHAT_VARIATIONS } from './variations-chat';
-import { PROMPT_VARIATIONS } from './variations-prompt';
+import { CONCEPTS } from './concepts'
+import type { SheetSpec } from './types'
+import { CHAT_VARIATIONS } from './variations-chat'
+import { PROMPT_VARIATIONS } from './variations-prompt'
 
 const EYEBROW = (detail: string) =>
-  `netko/brand · <b>step 1 of 3</b> · logo → mascot → identity · ${detail}`;
+  `netko/brand · <b>step 1 of 3</b> · logo → mascot → identity · ${detail}`
 
 export const SHEETS: SheetSpec[] = [
   {
@@ -28,4 +28,4 @@ export const SHEETS: SheetSpec[] = [
     recommended: ['a2-whiskers', 'b3-heritage'],
     next: '<b>Your move:</b> lock one, or mix traits (e.g. “A2 whiskers on A1’s head”). Then I refine the winner: optical fixes, favicon cut, outlined wordmark.',
   },
-];
+]

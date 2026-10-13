@@ -1,91 +1,91 @@
-import type { PALETTE } from './tokens';
+import type { PALETTE } from './tokens'
 
-export type MarkVariant = 'mono' | 'duo';
+export type MarkVariant = 'mono' | 'duo'
 
-export type MarkTone = 'ink' | 'paper';
+export type MarkTone = 'ink' | 'paper'
 
 export interface MarkParts {
-  body: string;
-  features: (color: string) => string;
-  accent: (color: string) => string;
-  isFeatureFilled?: boolean;
+  body: string
+  features: (color: string) => string
+  accent: (color: string) => string
+  isFeatureFilled?: boolean
 }
 
 export interface Concept {
-  key: string;
-  label: string;
-  name: string;
-  thesis: string;
-  readsAs: string;
-  risk: string;
-  parts: MarkParts;
-  isAccentBlinking?: boolean;
+  key: string
+  label: string
+  name: string
+  thesis: string
+  readsAs: string
+  risk: string
+  parts: MarkParts
+  isAccentBlinking?: boolean
 }
 
 export interface SheetSection {
-  heading?: string;
-  concepts: Concept[];
+  heading?: string
+  concepts: Concept[]
 }
 
 export interface SheetSpec {
-  slug: string;
-  eyebrow: string;
-  title: string;
-  lede: string;
-  sections: SheetSection[];
-  recommended?: string[];
-  next: string;
+  slug: string
+  eyebrow: string
+  title: string
+  lede: string
+  sections: SheetSection[]
+  recommended?: string[]
+  next: string
 }
 
-export type SheetFonts = Record<'display' | 'body' | 'bodyBold', string>;
+export type SheetFonts = Record<'display' | 'body' | 'bodyBold', string>
 
-export type MarkSource = Pick<Concept, 'name' | 'parts'>;
+export type MarkSource = Pick<Concept, 'name' | 'parts'>
 
 export interface MarkRequest {
-  concept: MarkSource;
-  variant: MarkVariant;
-  tone: MarkTone;
-  uid: string;
+  concept: MarkSource
+  variant: MarkVariant
+  tone: MarkTone
+  uid: string
 }
 
 export interface Expression extends MarkSource {
-  key: string;
-  face: string;
-  use: string;
+  key: string
+  face: string
+  use: string
 }
 
-export type LockupKind = 'horizontal' | 'stacked' | 'wordmark';
+export type LockupKind = 'horizontal' | 'stacked' | 'wordmark'
 
 export interface SvgArt {
-  svg: string;
-  width: number;
-  height: number;
+  svg: string
+  width: number
+  height: number
 }
 
-export type PaletteKey = keyof typeof PALETTE;
+export type PaletteKey = keyof typeof PALETTE
 
 export interface ContrastPair {
-  fg: PaletteKey;
-  bg: PaletteKey;
+  fg: PaletteKey
+  bg: PaletteKey
 }
 
-export type AsciiMode = 'color' | 'plain';
+export type AsciiMode = 'color' | 'plain'
 
 export interface AsciiCell {
-  char: string;
-  fg?: string;
-  bg?: string;
+  char: string
+  fg?: string
+  bg?: string
 }
 
 export interface AsciiText {
-  row: number;
-  text: string;
-  color?: string;
+  row: number
+  text: string
+  color?: string
 }
 
 export interface AsciiBanner {
-  key: string;
-  name: string;
-  use: string;
-  build: (mode: AsciiMode) => AsciiCell[][];
+  key: string
+  name: string
+  use: string
+  build: (mode: AsciiMode) => AsciiCell[][]
 }

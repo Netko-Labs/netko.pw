@@ -1,12 +1,13 @@
-import { CAT_EARS, chevron, dot, ear, outline, ring } from './marks';
-import type { Concept } from './types';
+import { CAT_EARS, chevron, dot, ear, outline, ring } from './marks'
+import type { Concept } from './types'
 
-const BUBBLE = '<rect x="24" y="72" width="208" height="140" rx="44" stroke="none"/>';
+const BUBBLE = '<rect x="24" y="72" width="208" height="140" rx="44" stroke="none"/>'
 const BUBBLE_OUTLINE =
-  'M24 116 L60 28 L118 72 H138 L196 28 L232 116 V168 Q232 212 188 212 H112 L48 242 L66 212 Q24 212 24 168 Z';
+  'M24 116 L60 28 L118 72 H138 L196 28 L232 116 V168 Q232 212 188 212 H112 L48 242 L66 212 Q24 212 24 168 Z'
 
-const chatFace = (c: string, width = 18) => chevron(c, '74,124 104,144 74,164', width) + dot(c, 128, 162);
-const ringEye = (c: string) => ring(c, 166, 144);
+const chatFace = (c: string, width = 18) =>
+  chevron(c, '74,124 104,144 74,164', width) + dot(c, 128, 162)
+const ringEye = (c: string) => ring(c, 166, 144)
 
 export const CHAT_VARIATIONS: Concept[] = [
   {
@@ -100,4 +101,4 @@ export const CHAT_VARIATIONS: Concept[] = [
         `<rect x="152" y="130" width="30" height="30" fill="none" stroke="${c}" stroke-width="14"/>`,
     },
   },
-];
+]

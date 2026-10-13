@@ -1,16 +1,20 @@
-import { contrastRatio, wcagGrade } from '../contrast';
-import { PALETTE } from '../tokens';
-import type { ContrastPair, PaletteKey } from '../types';
-import { sectionHead } from './art';
+import { contrastRatio, wcagGrade } from '../contrast'
+import { PALETTE } from '../tokens'
+import type { ContrastPair, PaletteKey } from '../types'
+import { sectionHead } from './art'
 
 const SWATCHES: { key: PaletteKey; role: string; text: string }[] = [
   { key: 'sumi', role: 'Ink. Primary text, dark surfaces, the cat’s body.', text: PALETTE.kami },
-  { key: 'kami', role: 'Paper. Light surfaces. A cool lilac white, never cream.', text: PALETTE.sumi },
+  {
+    key: 'kami',
+    role: 'Paper. Light surfaces. A cool lilac white, never cream.',
+    text: PALETTE.sumi,
+  },
   { key: 'sakura', role: 'The eye. One pink thing per view, nothing more.', text: PALETTE.sumi },
   { key: 'yoru', role: 'Night. Raised surfaces on dark: panels, code blocks.', text: PALETTE.kami },
   { key: 'fog', role: 'Muted labels, rules, metadata. Not for body text.', text: PALETTE.sumi },
   { key: 'matcha', role: 'exit 0. Success states only.', text: PALETTE.sumi },
-];
+]
 
 const RATIO = [
   { key: 'sumi', share: 50 },
@@ -19,7 +23,7 @@ const RATIO = [
   { key: 'fog', share: 4 },
   { key: 'sakura', share: 3 },
   { key: 'matcha', share: 1 },
-] as const;
+] as const
 
 const PAIRS: ContrastPair[] = [
   { fg: 'kami', bg: 'sumi' },
@@ -32,16 +36,16 @@ const PAIRS: ContrastPair[] = [
   { fg: 'sumi', bg: 'sakura' },
   { fg: 'fog', bg: 'kami' },
   { fg: 'sakura', bg: 'kami' },
-];
+]
 
 const contrastRow = (pair: ContrastPair) => {
-  const ratio = contrastRatio(pair);
+  const ratio = contrastRatio(pair)
   return `<tr>
     <td><span class="sample" style="color:${PALETTE[pair.fg]};background:${PALETTE[pair.bg]}">${pair.fg} on ${pair.bg}</span></td>
     <td class="mono">${ratio.toFixed(2)} : 1</td>
     <td>${wcagGrade(ratio)}</td>
-  </tr>`;
-};
+  </tr>`
+}
 
 export const colorSection = () => `
   <section id="color">
@@ -63,4 +67,4 @@ export const colorSection = () => `
       <thead><tr><th>pair</th><th>ratio</th><th>use for</th></tr></thead>
       <tbody>${PAIRS.map(contrastRow).join('')}</tbody>
     </table>
-  </section>`;
+  </section>`

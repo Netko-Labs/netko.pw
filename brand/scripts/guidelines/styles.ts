@@ -1,5 +1,5 @@
-import { PALETTE } from '../tokens';
-import type { SheetFonts } from '../types';
+import { PALETTE } from '../tokens'
+import type { SheetFonts } from '../types'
 
 export const renderStyles = (fonts: SheetFonts) => `
 @font-face { font-family: 'Departure Mono'; src: url(${fonts.display}) format('woff2'); }
@@ -107,4 +107,4 @@ footer { margin-top: 96px; font-family: var(--mono); color: var(--fog); font-siz
   h2 { font-size: 34px; }
   .card .specimen { font-size: 48px; }
 }
-`;
+`

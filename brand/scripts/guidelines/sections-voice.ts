@@ -1,12 +1,28 @@
-import { sectionHead } from './art';
+import { sectionHead } from './art'
 
 const SCALE = [
-  { label: 'display · 72', style: 'font:72px/1 var(--mono);letter-spacing:-.02em', text: 'hack the model' },
-  { label: 'h2 · 48', style: 'font:48px/1.05 var(--mono);letter-spacing:-.02em', text: 'Desktop apps, in Bun' },
+  {
+    label: 'display · 72',
+    style: 'font:72px/1 var(--mono);letter-spacing:-.02em',
+    text: 'hack the model',
+  },
+  {
+    label: 'h2 · 48',
+    style: 'font:48px/1.05 var(--mono);letter-spacing:-.02em',
+    text: 'Desktop apps, in Bun',
+  },
   { label: 'h3 · 22', style: 'font:22px var(--mono)', text: 'Install mirin' },
-  { label: 'body · 17', style: 'font:17px/1.6 var(--round)', text: 'Mirin is a desktop framework built natively around Bun.' },
-  { label: 'label · 13', style: 'font:13px var(--mono);color:var(--fog)', text: 'v0.4.2 · MIT · 2 min read' },
-];
+  {
+    label: 'body · 17',
+    style: 'font:17px/1.6 var(--round)',
+    text: 'Mirin is a desktop framework built natively around Bun.',
+  },
+  {
+    label: 'label · 13',
+    style: 'font:13px var(--mono);color:var(--fog)',
+    text: 'v0.4.2 · MIT · 2 min read',
+  },
+]
 
 export const typeSection = () => `
   <section id="type">
@@ -32,7 +48,7 @@ export const typeSection = () => `
       <li>Sentence case everywhere. Lowercase is reserved for the wordmark and for product names in code.</li>
       <li>Never use Departure Mono for paragraphs longer than two lines.</li>
     </ul>
-  </section>`;
+  </section>`
 
 const VOICE_PAIRS = [
   {
@@ -55,7 +71,7 @@ const VOICE_PAIRS = [
     good: 'Drafts the SQL with an LLM. You review it before anything runs.',
     bad: 'AI-powered magic that just works.',
   },
-];
+]
 
 export const voiceSection = () => `
   <section id="voice">
@@ -68,4 +84,4 @@ export const voiceSection = () => `
         <div class="card dont-say"><h4>don’t say</h4><p>${p.bad}</p></div>
       </div>`,
     ).join('')}
-  </section>`;
+  </section>`

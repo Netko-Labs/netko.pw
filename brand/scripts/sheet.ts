@@ -1,14 +1,14 @@
-import { renderMark } from './marks';
-import { PALETTE } from './tokens';
-import type { Concept, MarkTone, MarkVariant, SheetFonts, SheetSection, SheetSpec } from './types';
+import { renderMark } from './marks'
+import { PALETTE } from './tokens'
+import type { Concept, MarkTone, MarkVariant, SheetFonts, SheetSection, SheetSpec } from './types'
 
-const LADDER_SIZES = [64, 32, 16];
+const LADDER_SIZES = [64, 32, 16]
 
 const mark = (concept: Concept, variant: MarkVariant, tone: MarkTone, size: number, slot: string) =>
-  renderMark({ concept, variant, tone, uid: `${concept.key}-${variant}-${tone}-${slot}` }, size);
+  renderMark({ concept, variant, tone, uid: `${concept.key}-${variant}-${tone}-${slot}` }, size)
 
 const ladder = (concept: Concept, tone: MarkTone) =>
-  LADDER_SIZES.map((size) => mark(concept, 'mono', tone, size, `l${size}`)).join('');
+  LADDER_SIZES.map((size) => mark(concept, 'mono', tone, size, `l${size}`)).join('')
 
 const card = (concept: Concept, isRecommended: boolean) => `
   <article class="card${concept.isAccentBlinking ? ' is-blinking' : ''}">
@@ -31,20 +31,20 @@ const card = (concept: Concept, isRecommended: boolean) => `
       <dt>reads as</dt><dd>${concept.readsAs}</dd>
       <dt>risk</dt><dd>${concept.risk}</dd>
     </dl>
-  </article>`;
+  </article>`
 
 const chips = Object.entries(PALETTE)
   .map(
     ([name, hex]) =>
       `<li><span class="chip" style="background:${hex}"></span><b>${name}</b><code>${hex}</code></li>`,
   )
-  .join('');
+  .join('')
 
 const section = ({ heading, concepts }: SheetSection, recommended: string[]) => `
   ${heading ? `<h3 class="section-head">${heading}</h3>` : ''}
   <section class="grid" style="--columns:${concepts.length > 4 ? 3 : 2}">
     ${concepts.map((concept) => card(concept, recommended.includes(concept.key))).join('')}
-  </section>`;
+  </section>`
 
 export const renderSheet = (spec: SheetSpec, fonts: SheetFonts) => `<!doctype html>
 <html lang="en">
@@ -120,4 +120,4 @@ h1 .caret { display: inline-block; width: .5em; height: .9em; background: var(--
   <p class="next">${spec.next}</p>
 </main>
 </body>
-</html>`;
+</html>`

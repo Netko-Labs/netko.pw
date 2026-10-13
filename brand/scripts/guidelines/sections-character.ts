@@ -1,8 +1,8 @@
-import { EXPRESSIONS } from '../term';
-import { PALETTE } from '../tokens';
-import { mark, pixelMark, sectionHead } from './art';
+import { EXPRESSIONS } from '../term'
+import { PALETTE } from '../tokens'
+import { mark, pixelMark, sectionHead } from './art'
 
-const PIXEL_GRID = Array.from({ length: 17 }, (_, i) => `<path d="M${i} 0V16M0 ${i}H16"/>`).join('');
+const PIXEL_GRID = Array.from({ length: 17 }, (_, i) => `<path d="M${i} 0V16M0 ${i}H16"/>`).join('')
 
 export const characterSections = () => `
   <section id="expressions">
@@ -37,4 +37,4 @@ export const characterSections = () => `
       <div class="tile on-paper"><div style="display:flex;gap:20px;align-items:flex-end">${pixelMark('ink', 16)}${pixelMark('ink', 32)}${pixelMark('ink', 64)}</div><span class="label">1× · 2× · 4×</span></div>
       <div class="tile on-sumi"><div style="display:flex;gap:20px;align-items:flex-end">${pixelMark('paper', 16)}${pixelMark('paper', 32)}${pixelMark('paper', 64)}</div><span class="label">on sumi</span></div>
     </div>
-  </section>`;
+  </section>`
