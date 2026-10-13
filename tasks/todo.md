@@ -5,8 +5,9 @@ Regenerate: `bun brand/scripts/build-logo.ts`
 
 - [x] Step 1 — logo concepts (A Prompt · B Chat · C Ear-n · D Tokens) → `brand/01-logo/`
 - [x] Step 1b — five variations each of A and B → `brand/01-logo/variations.html`
-- [ ] Pick + refine winning mark (optical tweaks, favicon set, outlined wordmark)
-- [ ] Step 2 — mascot: character sheet (poses, expressions), built from the winning mark
-- [ ] Step 3 — identity: palette, type, voice, usage rules, social/OG templates
+- [x] Winner: B5 Term — pixel wordmark, pixel-cut favicon, expressions → `brand/kit/`
+- [ ] Step 2 — mascot: full character beyond face expressions (poses, illustration)
+- [ ] Apply kit to netko.pw (favicon, OG, logo) + org avatar
+- [x] Step 3 — guidelines → `brand/guidelines/index.html` (`bun brand/scripts/build-guidelines.ts`)
 
 Acceptance: every asset is pure-path SVG + PNG export, reproducible from `brand/scripts`.

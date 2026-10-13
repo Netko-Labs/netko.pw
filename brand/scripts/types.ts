@@ -1,3 +1,5 @@
+import type { PALETTE } from './tokens';
+
 export type MarkVariant = 'mono' | 'duo';
 
 export type MarkTone = 'ink' | 'paper';
@@ -37,9 +39,32 @@ export interface SheetSpec {
 
 export type SheetFonts = Record<'display' | 'body' | 'bodyBold', string>;
 
+export type MarkSource = Pick<Concept, 'name' | 'parts'>;
+
 export interface MarkRequest {
-  concept: Concept;
+  concept: MarkSource;
   variant: MarkVariant;
   tone: MarkTone;
   uid: string;
+}
+
+export interface Expression extends MarkSource {
+  key: string;
+  face: string;
+  use: string;
+}
+
+export type LockupKind = 'horizontal' | 'stacked' | 'wordmark';
+
+export interface SvgArt {
+  svg: string;
+  width: number;
+  height: number;
+}
+
+export type PaletteKey = keyof typeof PALETTE;
+
+export interface ContrastPair {
+  fg: PaletteKey;
+  bg: PaletteKey;
 }
