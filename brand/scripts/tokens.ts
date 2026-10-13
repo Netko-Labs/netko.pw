@@ -10,7 +10,7 @@ export const PALETTE = {
 export const BRAND = {
   tagline: 'Open-source tools, hacked together with LLMs.',
   version: 'v0.1',
-  url: 'https://netko.pw',
+  url: 'https://netko.dev',
 } as const;
 
 export const TONE_FG = {

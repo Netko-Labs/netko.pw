@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "brand": "bun brand/scripts/build-guidelines.ts",
+    "brand:explore": "bun brand/scripts/build-logo.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.1.0",

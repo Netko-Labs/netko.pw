@@ -1,4 +1,4 @@
-import { PALETTE } from '../tokens';
+import { BRAND, PALETTE } from '../tokens';
 import { lockup, mark, pixelMark, sectionHead } from './art';
 import { TAGLINE } from './sections-identity';
 import { BANNER, toHtml } from '../ascii';
@@ -37,7 +37,7 @@ export const appsSection = (ogCardDataUri: string) => `
     <h3>GitHub org</h3>
     <div class="mock card" style="display:flex;gap:24px;align-items:center">
       <div style="background:${PALETTE.sumi};border-radius:6px;padding:14px;flex-shrink:0">${mark('paper', 'duo', 96)}</div>
-      <div><p style="font-size:26px;font-weight:700">Netko Labs</p><p>${TAGLINE}</p><p class="caption">netko.pw · 9 repositories</p></div>
+      <div><p style="font-size:26px;font-weight:700">Netko Labs</p><p>${TAGLINE}</p><p class="caption">${BRAND.url.replace('https://', '')} · open source on GitHub</p></div>
     </div>
 
     <h3>Browser tab</h3>

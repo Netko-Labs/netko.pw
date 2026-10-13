@@ -9,13 +9,13 @@ bun run dev      # Start dev server (Vite)
 bun run build    # Type-check and build for production
 bun run lint     # Run ESLint
 bun run preview  # Preview production build
-bun brand/scripts/build-guidelines.ts  # Regenerate brand kit + guidelines (brand/kit, brand/guidelines)
-bun brand/scripts/build-logo.ts        # Regenerate logo exploration sheets (brand/01-logo)
+bun run brand          # Regenerate brand kit + guidelines (brand/kit, brand/guidelines)
+bun run brand:explore  # Regenerate logo exploration sheets (brand/01-logo)
 ```
 
 ## Brand
 
-`brand/` holds the Netko identity: the **Term** mark (chat-bubble cat, square corners, pink eye), a pixel-grid wordmark, expressions, palette, and type. Everything there is generated from `brand/scripts/*.ts`. Edit the source, rerun, and never hand-edit exports. `brand/guidelines/index.html` is the reference.
+`brand/` holds the Netko identity: the **Term** mark (chat-bubble cat, square corners, pink eye), a pixel-grid wordmark, expressions, palette, and type. Everything there is generated from `brand/scripts/*.ts`. Edit the source, rerun, and never hand-edit exports. `brand/guidelines/index.html` is the reference; `brand/README.md` maps every edit to its source file.
 
 ## Architecture
 

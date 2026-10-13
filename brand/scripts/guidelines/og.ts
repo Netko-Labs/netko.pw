@@ -1,4 +1,4 @@
-import { PALETTE } from '../tokens';
+import { BRAND, PALETTE } from '../tokens';
 import type { SheetFonts } from '../types';
 import { lockup, mark } from './art';
 import { TAGLINE } from './sections-identity';
@@ -20,5 +20,5 @@ small b { color: ${PALETTE.sakura}; font-weight: 400; }
 <body>
   <div class="mark">${mark('paper', 'duo', 360)}</div>
   <div>${lockup('wordmark', 'paper', 480)}<p>${TAGLINE}</p></div>
-  <small><b>$</b> open https://netko.pw</small>
+  <small><b>$</b> open ${BRAND.url}</small>
 </body></html>`;
