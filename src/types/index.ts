@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+
 export interface RepoData {
   name: string
   description: string | null
@@ -163,57 +165,75 @@ export interface VariantSwitcherProps {
   variants: VariantMeta[]
 }
 
-export interface FlapCounterProps {
-  label: string
-  value: number
+export interface PixelCell {
+  x: number
+  y: number
+  isAccent: boolean
 }
 
-export interface TickerProps {
-  repos: RepoData[]
+export interface PixelGrid {
+  size: number
+  cells: PixelCell[]
 }
 
-export interface IdeFile {
-  path: string
-  label: string
-  depth: number
-}
-
-export interface TerminalLine {
-  id: number
-  kind: 'input' | 'output'
-  text: string
-}
-
-export interface IdeTerminalProps {
-  files: IdeFile[]
-  onOpen: (path: string) => void
-  onPet: () => void
-  onToggleTheme: () => void
-}
-
-export interface IdePaneProps {
-  path: string
-  data: GitHubData
-  expression: ExpressionKey
-}
-
-export type ChatTopic = 'intro' | 'tools' | 'code' | 'how' | 'cat' | 'unknown'
-
-export interface ChatMessage {
-  id: number
-  from: 'term' | 'visitor'
-  topic: ChatTopic
-  text: string
-}
-
-export interface ChatReplyProps {
-  topic: ChatTopic
-  data: GitHubData
-}
-
-export interface BuildingFloor {
-  level: string
-  room: string
-  scene: string
+export interface StickerTool {
   tool: FeaturedTool
+  color: string
+  tilt: number
+}
+
+export interface KeyboardKeyProps {
+  label: string
+  isPressed: boolean
+  onPress: (label: string) => void
+}
+
+export interface NightWalkCardProps {
+  tool: FeaturedTool | null
+}
+
+export interface VoxelCatProps {
+  className?: string
+}
+
+export interface RevealProps {
+  children: ReactNode
+  delayMs?: number
+  className?: string
+}
+
+export interface SceneShop {
+  name: string
+  status: ToolStatus
+}
+
+export interface SceneFrame {
+  width: number
+  progress: number
+  time: number
+  isMoving: boolean
+  activeIndex: number
+  shops: SceneShop[]
+  cat: PixelGrid
+}
+
+export interface SparkleProps {
+  className: string
+}
+
+export interface Vec3 {
+  x: number
+  y: number
+  z: number
+}
+
+export interface VoxelFace {
+  corners: Vec3[]
+  normal: Vec3
+  isAccent: boolean
+}
+
+export interface VoxelPose {
+  yaw: number
+  pitch: number
 }

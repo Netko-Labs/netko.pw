@@ -14,12 +14,12 @@ import {
 } from './site'
 import { ANCHOR, toHash } from './site/anchors'
 import {
-  BuildingVariant,
-  ChatVariant,
-  FieldNotesVariant,
-  IdeVariant,
-  LabOpsVariant,
+  NightWalkVariant,
+  ObsidianVariant,
+  PosterVariant,
+  StickerClubVariant,
   VariantSwitcher,
+  VoxelVariant,
 } from './variants'
 
 function heroExpression(isLoading: boolean, hasError: boolean): ExpressionKey {
@@ -28,20 +28,20 @@ function heroExpression(isLoading: boolean, hasError: boolean): ExpressionKey {
 }
 
 const VARIANT_COMPONENTS: Record<number, ComponentType<VariantProps>> = {
-  1: LabOpsVariant,
-  2: IdeVariant,
-  3: ChatVariant,
-  4: FieldNotesVariant,
-  5: BuildingVariant,
+  1: PosterVariant,
+  2: StickerClubVariant,
+  3: NightWalkVariant,
+  4: ObsidianVariant,
+  5: VoxelVariant,
 }
 
 const VARIANTS: VariantMeta[] = [
   { id: 0, name: 'Current' },
-  { id: 1, name: 'Lab Ops Board' },
-  { id: 2, name: 'The Repo Is the Page' },
-  { id: 3, name: 'Talk to Term' },
-  { id: 4, name: 'Field Notes' },
-  { id: 5, name: 'The Lab Building' },
+  { id: 1, name: 'Poster' },
+  { id: 2, name: 'Sticker Club' },
+  { id: 3, name: 'Night Walk' },
+  { id: 4, name: 'Obsidian' },
+  { id: 5, name: 'Voxel' },
 ]
 
 const currentVariant = () => Number(new URLSearchParams(window.location.search).get('v') ?? 0)
