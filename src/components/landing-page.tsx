@@ -14,12 +14,13 @@ import {
 } from './site'
 import { ANCHOR, toHash } from './site/anchors'
 import {
-  NightWalkVariant,
-  ObsidianVariant,
-  PosterVariant,
+  StickerCandyVariant,
   StickerClubVariant,
+  StickerGachaVariant,
+  StickerHoloVariant,
+  StickerLaptopVariant,
+  StickerScrapbookVariant,
   VariantSwitcher,
-  VoxelVariant,
 } from './variants'
 
 function heroExpression(isLoading: boolean, hasError: boolean): ExpressionKey {
@@ -27,24 +28,26 @@ function heroExpression(isLoading: boolean, hasError: boolean): ExpressionKey {
   return hasError ? 'sleep' : 'idle'
 }
 
-const VARIANT_COMPONENTS: Record<number, ComponentType<VariantProps>> = {
-  1: PosterVariant,
-  2: StickerClubVariant,
-  3: NightWalkVariant,
-  4: ObsidianVariant,
-  5: VoxelVariant,
+const VARIANT_COMPONENTS: Record<string, ComponentType<VariantProps>> = {
+  '2': StickerClubVariant,
+  '2a': StickerLaptopVariant,
+  '2b': StickerGachaVariant,
+  '2c': StickerScrapbookVariant,
+  '2d': StickerCandyVariant,
+  '2e': StickerHoloVariant,
 }
 
 const VARIANTS: VariantMeta[] = [
-  { id: 0, name: 'Current' },
-  { id: 1, name: 'Poster' },
-  { id: 2, name: 'Sticker Club' },
-  { id: 3, name: 'Night Walk' },
-  { id: 4, name: 'Obsidian' },
-  { id: 5, name: 'Voxel' },
+  { id: '0', name: 'Current' },
+  { id: '2', name: 'Sticker Club' },
+  { id: '2a', name: 'Laptop Lid' },
+  { id: '2b', name: 'Gacha' },
+  { id: '2c', name: 'Scrapbook' },
+  { id: '2d', name: 'Candy' },
+  { id: '2e', name: 'Holo' },
 ]
 
-const currentVariant = () => Number(new URLSearchParams(window.location.search).get('v') ?? 0)
+const currentVariant = () => new URLSearchParams(window.location.search).get('v') ?? '0'
 
 export function LandingPage() {
   const { theme, toggleTheme } = useTheme()
@@ -88,7 +91,7 @@ export function LandingPage() {
         <Principles />
       </main>
       <SiteFooter />
-      <VariantSwitcher current={0} variants={VARIANTS} />
+      <VariantSwitcher current="0" variants={VARIANTS} />
     </div>
   )
 }

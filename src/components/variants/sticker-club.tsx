@@ -1,42 +1,13 @@
-import { useCallback, useState } from 'react'
-import {
-  BrandMark,
-  FEATURED_TOOLS,
-  GITHUB_ORG_URL,
-  otherRepos,
-  PRINCIPLES,
-  ThemeToggle,
-  toolLinks,
-} from '@/components/site'
+import { BrandMark, GITHUB_ORG_URL, ThemeToggle } from '@/components/site'
 import { useGoogleFonts } from '@/hooks/use-google-fonts'
-import type { ExpressionKey, SparkleProps, StickerTool, VariantProps } from '@/types'
-import { KeyboardKey, usePressedKeys } from './sticker-keyboard'
-
-const KEYS = ['N', 'E', 'T', 'K', 'O']
-const FREDOKA = { fontFamily: "'Fredoka', sans-serif", fontWeight: 600 }
-const STICKER_COLORS = ['#FFE38A', '#B9E8A8', '#9DD8FF', '#FFB8D2', '#D9CCFF', '#FFD2A6']
-const TILTS = [-4, 3, -2, 5, -5, 2]
-const PRINCIPLE_FACES: ExpressionKey[] = ['loading', 'happy', 'idle']
-
-const STICKERS: StickerTool[] = FEATURED_TOOLS.map((tool, index) => ({
-  tool,
-  color: STICKER_COLORS[index],
-  tilt: TILTS[index],
-}))
-
-function Sparkle({ className }: SparkleProps) {
-  return (
-    <svg aria-hidden className={`absolute ${className}`} viewBox="0 0 24 24" width="28" height="28">
-      <path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z" fill="currentColor" />
-    </svg>
-  )
-}
+import type { VariantProps } from '@/types'
+import { ClubExtras } from './club-extras'
+import { KEYS, KeyboardKey, useCatKeyboard } from './sticker-keyboard'
+import { FREDOKA, FREDOKA_FONTS, primaryHref, Sparkle, STICKERS, StickerBody } from './sticker-kit'
 
 export function StickerClubVariant({ data, theme, onToggleTheme }: VariantProps) {
-  useGoogleFonts('family=Fredoka:wght@500;600;700')
-  const [typedCount, setTypedCount] = useState(0)
-  const onType = useCallback(() => setTypedCount((count) => count + 1), [])
-  const { pressed, press } = usePressedKeys(KEYS, onType)
+  useGoogleFonts(FREDOKA_FONTS)
+  const { pressed, press, typedCount, face, isBlinking } = useCatKeyboard()
 
   return (
     <div className="min-h-dvh overflow-hidden bg-[#F6F1FF] text-sumi">
@@ -68,13 +39,19 @@ export function StickerClubVariant({ data, theme, onToggleTheme }: VariantProps)
         <div className="mt-10 flex flex-col items-center">
           <BrandMark
             className="w-56 transition-transform duration-150 sm:w-72 [&_svg]:h-auto [&_svg]:w-full"
-            expression={pressed ? 'happy' : typedCount > 0 ? 'idle' : 'sleep'}
-            isBlinking={!pressed && typedCount > 0}
+            expression={face}
+            isBlinking={isBlinking}
             size={288}
           />
           <div className="-mt-2 flex gap-2 rounded-[28px] border-[3px] border-sumi bg-[#D9CCFF] p-3 shadow-[0_10px_0_var(--sumi)] sm:gap-3 sm:p-4">
             {KEYS.map((key) => (
-              <KeyboardKey isPressed={pressed === key} key={key} label={key} onPress={press} />
+              <KeyboardKey
+                className="border-sumi bg-white text-sumi"
+                isPressed={pressed === key}
+                key={key}
+                label={key}
+                onPress={press}
+              />
             ))}
           </div>
           <p className="mt-6 font-mono text-sm">
@@ -90,67 +67,20 @@ export function StickerClubVariant({ data, theme, onToggleTheme }: VariantProps)
           the sticker sheet
         </h2>
         <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {STICKERS.map(({ tool, color, tilt }) => {
-            const [primary] = toolLinks(tool)
-            return (
-              <a
-                className="block rounded-[32px] border-[3px] border-sumi p-6 shadow-[0_0_0_8px_white,0_14px_24px_-8px_rgb(27_23_36/.35)] transition-transform duration-200 hover:-translate-y-2 hover:rotate-0"
-                href={primary?.href ?? GITHUB_ORG_URL}
-                key={tool.name}
-                style={{ background: color, transform: `rotate(${tilt}deg)` }}
-              >
-                <span className="text-3xl" style={FREDOKA}>
-                  {tool.name}
-                </span>
-                <span className="mt-2 block font-bold">{tool.tagline}</span>
-                <span className="mt-3 block text-sm opacity-80">{tool.description}</span>
-                <span className="mt-4 inline-block rounded-full bg-white px-3 py-1 font-mono text-xs">
-                  {primary ? `${primary.label} →` : 'coming soon'}
-                </span>
-              </a>
-            )
-          })}
-        </div>
-      </section>
-
-      <section className="mx-auto grid max-w-5xl gap-6 px-5 pb-20 md:grid-cols-3">
-        {PRINCIPLES.map((principle, index) => (
-          <div className="flex items-start gap-3" key={principle.name}>
-            <BrandMark className="w-14 shrink-0" expression={PRINCIPLE_FACES[index]} size={56} />
-            <div className="rounded-3xl rounded-tl-md border-[3px] border-sumi bg-white p-4">
-              <p className="text-xl" style={FREDOKA}>
-                {principle.name}!
-              </p>
-              <p className="mt-1 text-sm">{principle.line}</p>
-            </div>
-          </div>
-        ))}
-      </section>
-
-      <section className="mx-auto max-w-4xl px-5 pb-16 text-center">
-        <p className="text-2xl" style={FREDOKA}>
-          more stickers in the drawer
-        </p>
-        <div className="mt-5 flex flex-wrap justify-center gap-3">
-          {otherRepos(data.repos).map((repo) => (
+          {STICKERS.map((sticker) => (
             <a
-              className="rounded-full border-2 border-sumi bg-white px-4 py-2 font-mono text-sm hover:bg-[#FFE38A]"
-              href={repo.url}
-              key={repo.name}
+              className="block rounded-[32px] border-[3px] border-sumi p-6 shadow-[0_0_0_8px_white,0_14px_24px_-8px_rgb(27_23_36/.35)] transition-transform duration-200 hover:-translate-y-2 hover:rotate-0"
+              href={primaryHref(sticker)}
+              key={sticker.tool.name}
+              style={{ background: sticker.color, transform: `rotate(${sticker.tilt}deg)` }}
             >
-              {repo.name}
+              <StickerBody sticker={sticker} />
             </a>
           ))}
         </div>
       </section>
 
-      <footer className="flex flex-col items-center gap-3 pb-14">
-        <BrandMark className="w-20" expression="sleep" size={80} />
-        <p className="text-xl" style={FREDOKA}>
-          zzz… see you on github
-        </p>
-        <p className="font-mono text-xs opacity-70">© 2026 Netko Labs</p>
-      </footer>
+      <ClubExtras repos={data.repos} />
     </div>
   )
 }

@@ -1,5 +1,3 @@
-import type { ReactNode } from 'react'
-
 export interface RepoData {
   name: string
   description: string | null
@@ -156,24 +154,13 @@ export interface VariantProps {
 }
 
 export interface VariantMeta {
-  id: number
+  id: string
   name: string
 }
 
 export interface VariantSwitcherProps {
-  current: number
+  current: string
   variants: VariantMeta[]
-}
-
-export interface PixelCell {
-  x: number
-  y: number
-  isAccent: boolean
-}
-
-export interface PixelGrid {
-  size: number
-  cells: PixelCell[]
 }
 
 export interface StickerTool {
@@ -186,54 +173,53 @@ export interface KeyboardKeyProps {
   label: string
   isPressed: boolean
   onPress: (label: string) => void
-}
-
-export interface NightWalkCardProps {
-  tool: FeaturedTool | null
-}
-
-export interface VoxelCatProps {
   className?: string
 }
 
-export interface RevealProps {
-  children: ReactNode
-  delayMs?: number
-  className?: string
+export interface StickerBodyProps {
+  sticker: StickerTool
+  isCompact?: boolean
 }
 
-export interface SceneShop {
-  name: string
-  status: ToolStatus
+export interface StickerPosition {
+  x: number
+  y: number
 }
 
-export interface SceneFrame {
-  width: number
-  progress: number
-  time: number
-  isMoving: boolean
-  activeIndex: number
-  shops: SceneShop[]
-  cat: PixelGrid
+export interface HoloStickerProps {
+  sticker: StickerTool
+}
+
+export interface GachaMachineProps {
+  isDropping: boolean
+  onTurn: () => void
 }
 
 export interface SparkleProps {
   className: string
 }
 
-export interface Vec3 {
-  x: number
-  y: number
-  z: number
+export interface StickerDrag {
+  index: number
+  pointerX: number
+  pointerY: number
+  origin: StickerPosition
+  hasMoved: boolean
 }
 
-export interface VoxelFace {
-  corners: Vec3[]
-  normal: Vec3
-  isAccent: boolean
+export interface ClubExtrasProps {
+  repos: RepoData[]
 }
 
-export interface VoxelPose {
-  yaw: number
-  pitch: number
+export interface StickerDetailProps {
+  sticker: StickerTool
+}
+
+export interface DoodleProps {
+  className?: string
+}
+
+export interface WashiTapeProps {
+  color: string
+  className?: string
 }
