@@ -9,7 +9,17 @@ bun run dev      # Start dev server (Vite)
 bun run build    # Type-check and build for production
 bun run lint     # Run ESLint
 bun run preview  # Preview production build
+bun run cf:dev   # Build and serve dist/ through workerd (local Workers runtime)
+bun run deploy   # Build and deploy to Cloudflare Workers
 ```
+
+## Deploy
+
+Cloudflare Workers static assets, no Worker script. `wrangler.jsonc` serves `dist/` with SPA fallback on the `netko.dev` and `www.netko.dev` custom domains; `public/_headers` sets security headers and immutable caching for hashed `/assets/*`. Workers Builds: build command `bun run build`, deploy command `bunx wrangler deploy`.
+
+## Brand
+
+Brand source is internal and lives in the private `Netko-Labs/brand-assets` repo (`netko/`). This repo only receives generated output, by running `bun run netko:sync ../netko.pw` from brand-assets: favicons and `og-card.png` in `public/`, and `brand.css`, `brand-art.ts` and `fonts/` in `src/generated/`. Never edit `src/generated/`, and never add brand source here.
 
 ## Architecture
 
@@ -18,7 +28,6 @@ This is a React SPA for the Netko organization landing page, built with:
 - **React 19** - UI framework
 - **TypeScript** - Strict mode enabled
 - **Tailwind CSS v4** - Styling via `@tailwindcss/vite` plugin
-- **Motion** - Animations (formerly Framer Motion)
 - **Tabler Icons** - Icon library
 
 ### Project Structure
@@ -26,30 +35,25 @@ This is a React SPA for the Netko organization landing page, built with:
 ```
 src/
 ├── components/
-│   ├── landing-page.tsx       # Main landing page (uses sub-components)
-│   ├── landing/               # Landing page sub-components
-│   │   ├── index.ts           # Barrel exports
-│   │   ├── constants.ts       # Animation variants, data, configs
-│   │   ├── floating-elements.tsx
-│   │   ├── header.tsx
-│   │   ├── hero.tsx
-│   │   ├── project-card.tsx
-│   │   ├── glitchcove-card.tsx
-│   │   ├── contributor-card.tsx
-│   │   ├── stats-cards.tsx
-│   │   ├── tech-stack.tsx
-│   │   ├── funny-metrics.tsx
-│   │   └── footer.tsx
-│   └── ui/                    # Reusable UI components (shadcn-style)
-├── hooks/
-│   └── use-github-data.ts     # GitHub API data fetching hook
-├── types/
-│   └── index.ts               # Shared TypeScript interfaces
-├── assets/                    # Static assets (SVGs imported as React components)
-├── lib/utils.ts               # Utility functions (cn for class merging)
-├── index.css                  # Global styles, CSS variables, Tailwind config
-├── App.tsx                    # Root component
-└── main.tsx                   # Entry point
+│   ├── landing-page.tsx       # Wires theme + GitHub data into HoloPage
+│   ├── holo/                  # The netko.dev page (barrel: index.ts)
+│   │   ├── holo-page.tsx      # Composition: header → hero → tools → how we build → other repos → footer
+│   │   ├── holo-hero.tsx      # Headline, CTAs, mascot + N E T K O keyboard game
+│   │   ├── holo-sticker.tsx   # Tool card with pointer tilt + holo shine
+│   │   ├── pixel-kit.tsx      # PixelSprite / PixelBox / PixelKey / PixelBubble
+│   │   └── ...                # holo-candy (confetti, walker, stars), pixel-sprites, sticker-keyboard, sticker-kit
+│   ├── site/                  # Shared data + brand (barrel: index.ts)
+│   │   ├── brand-art.tsx      # BrandMark / PixelMark from src/generated/brand-art.ts
+│   │   ├── raw-markup.tsx     # The one place generated brand markup is injected
+│   │   ├── featured.ts        # Curated tools (FEATURED_TOOLS), status labels, org URL
+│   │   ├── anchors.ts         # Section ids shared by links and sections
+│   │   └── ...                # data (repo helpers, principles), site-header (ThemeToggle)
+│   └── ui/                    # shadcn primitives (currently unused)
+├── generated/                 # Synced from brand-assets: brand.css, brand-art.ts, fonts/ (never edit)
+├── hooks/                     # use-github-data, use-theme (system + toggle), use-seen-once
+├── lib/                       # cn()
+├── types/index.ts             # All shared types
+└── index.css                  # Tailwind v4 theme, pixel frames, holo effects, on top of the brand palette
 ```
 
 ### Key Patterns
@@ -61,14 +65,9 @@ import { useGitHubData } from '@/hooks/use-github-data'
 import type { RepoData } from '@/types'
 ```
 
-**SVG as React Components:** Import with `?react` suffix
-```typescript
-import LogoSvg from '@/assets/logo.svg?react'
-```
+**Theme:** `data-theme="light|dark"` on `<html>`, set before paint by the inline script in `index.html` and kept in sync by `useTheme`. Semantic tokens (`bg`, `fg`, `surface`, `line`, `muted`) live in `src/index.css`; raw palette vars come from `src/generated/brand.css`. Sakura is never text on kami (2.72:1), only graphics.
 
-**CSS Variables:** Theme colors defined in `src/index.css` using OKLCH color space with light/dark mode support via `.dark` class.
-
-**Animations:** Use Motion library variants for staggered animations and hover effects. Animation variants are centralized in `src/components/landing/constants.ts`.
+**Animations:** CSS only (blink, holo shine, confetti, walker); JS only sets CSS vars for card tilt. Always respect `prefers-reduced-motion`.
 
 ## Code Style Rules
 

@@ -1,25 +1,4 @@
-import type { ReactNode } from 'react'
-
-export type InterfaceProfile =
-  | 'void'
-  | 'phosphor'
-  | 'amber'
-  | 'ultraviolet'
-  | 'paper'
-  | 'zine'
-  | 'logbook'
-  | 'circuit'
-  | 'desktop'
-  | 'arcade'
-
-export interface InterfaceProfileConfig {
-  id: InterfaceProfile
-  index: string
-  name: string
-  note: string
-  accent: string
-  dark: boolean
-}
+import type { CSSProperties, ReactNode } from 'react'
 
 export interface RepoData {
   name: string
@@ -77,105 +56,98 @@ export interface MainContributor {
   website: string
 }
 
-export interface TechStackItem {
+export type Theme = 'light' | 'dark'
+
+export type ExpressionKey = 'idle' | 'happy' | 'loading' | 'error' | 'sleep'
+
+export type ToolStatus = 'open-source' | 'live' | 'building'
+
+export interface FeaturedTool {
   name: string
-  color: string
+  tagline: string
+  description: string
+  stack: string[]
+  status: ToolStatus
+  repo?: string
+  site?: string
+  docs?: string
 }
 
-export interface FunnyMetric {
-  value: string
+export interface ToolLink {
   label: string
-  color: string
-}
-
-export interface AsciiFrameBaseProps {
-  className?: string
-  children: ReactNode
-  as?: 'section' | 'article' | 'aside' | 'div' | 'nav'
-}
-
-export interface AsciiTitledFrameProps extends AsciiFrameBaseProps {
-  title: ReactNode
-  meta?: ReactNode
-  header?: never
-  headingLevel?: 'h2' | 'h3' | 'p' | 'span'
-}
-
-export interface AsciiCustomHeaderFrameProps extends AsciiFrameBaseProps {
-  header: ReactNode
-  title?: never
-  meta?: never
-  headingLevel?: never
-}
-
-export type AsciiFrameProps = AsciiTitledFrameProps | AsciiCustomHeaderFrameProps
-
-export interface AsciiRuleProps {
-  character?: string
-}
-
-export interface AsciiArtProps {
-  children: string
-  label?: string
-}
-
-export interface AsciiFlipbookProps {
-  frames: readonly [string, string, string, string]
-  label: string
-  className?: string
-}
-
-export interface AsciiBadgeProps {
-  children: ReactNode
-}
-
-export interface AsciiActionProps {
   href: string
-  external?: boolean
+  kind: 'repo' | 'site' | 'docs'
+}
+
+export interface BrandMarkProps {
+  expression?: ExpressionKey
+  size: number
+  isBlinking?: boolean
+  className?: string
+}
+
+export interface PixelMarkProps {
+  size: number
+  className?: string
+}
+
+export interface ThemeToggleProps {
+  theme: Theme
+  onToggle: () => void
+}
+
+export interface RawMarkupProps {
+  html: string
+  className?: string
+  as?: 'span' | 'pre'
+}
+
+export interface HoloPageProps {
+  data: GitHubData
+  theme: Theme
+  onToggleTheme: () => void
+}
+
+export interface StickerTool {
+  tool: FeaturedTool
+  color: string
+  tilt: number
+}
+
+export interface HoloStickerProps {
+  sticker: StickerTool
+  repo?: RepoData
+}
+
+export interface PixelSpriteProps {
+  rows: string[]
+  scale: number
+  className?: string
+  label?: string
+  style?: CSSProperties
+}
+
+export interface PixelBoxProps {
   children: ReactNode
+  className?: string
+  innerClassName?: string
+  style?: CSSProperties
+  innerStyle?: CSSProperties
+  isLifted?: boolean
 }
 
-export interface AsciiPromptProps {
-  command: string
-  output?: ReactNode
-}
-
-export interface AsciiStatProps {
-  label: ReactNode
-  value: ReactNode
-}
-
-export interface AsciiProfileSwitcherProps {
-  profile: InterfaceProfile
-  onChange: (profile: InterfaceProfile) => void
-}
-
-export interface AsciiShellProps {
-  profile: InterfaceProfile
-  onProfileChange: (profile: InterfaceProfile) => void
-  error: Error | null
-  children: ReactNode
-}
-
-export interface AsciiContributorsBoothProps {
-  contributor: MainContributor
-}
-
-export type AsciiBootPhase = 'loading' | 'exiting'
-
-export interface AsciiBootScreenProps {
-  phase: AsciiBootPhase
-}
-
-export interface AsciiMode {
-  id: InterfaceProfile
+export interface PixelKeyProps {
   label: string
-  slug: string
-  command: string
-  output: string
-  headline: [string, string]
-  lede: string
-  art: string
-  statusLines: [string, string, string]
-  signoff: string
+  isPressed: boolean
+  isLit?: boolean
+  onPress: (label: string) => void
+}
+
+export interface PixelBubbleProps {
+  text: string
+  isLarge?: boolean
+}
+
+export interface PixelConfettiProps {
+  isActive: boolean
 }

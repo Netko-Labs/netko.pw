@@ -1,37 +1,56 @@
 import { useCallback, useEffect, useState } from 'react'
-import { interfaceProfiles } from '@/components/landing/profiles'
-import type { InterfaceProfile } from '@/types'
+import { PALETTE } from '@/generated/brand-art'
+import type { Theme } from '@/types'
 
-const STORAGE_KEY = 'netko-interface-profile-v4'
-const profileIds = new Set(interfaceProfiles.map((profile) => profile.id))
+const STORAGE_KEY = 'netko-theme'
+const DARK_QUERY = '(prefers-color-scheme: dark)'
+const THEME_COLOR: Record<Theme, string> = { light: PALETTE.kami, dark: PALETTE.sumi }
 
-function getStoredProfile(): InterfaceProfile {
-  if (typeof window === 'undefined') return 'zine'
+function readStoredTheme(): Theme | null {
+  try {
+    const stored = window.localStorage.getItem(STORAGE_KEY)
+    return stored === 'light' || stored === 'dark' ? stored : null
+  } catch {
+    return null
+  }
+}
 
-  const stored = window.localStorage.getItem(STORAGE_KEY)
-  return profileIds.has(stored as InterfaceProfile) ? (stored as InterfaceProfile) : 'zine'
+function storeTheme(theme: Theme) {
+  try {
+    window.localStorage.setItem(STORAGE_KEY, theme)
+  } catch {
+    // Storage blocked: the toggle still works, it just won't persist.
+  }
+}
+
+function readSystemTheme(): Theme {
+  return window.matchMedia(DARK_QUERY).matches ? 'dark' : 'light'
 }
 
 export function useTheme() {
-  const [profile, setProfileState] = useState<InterfaceProfile>(getStoredProfile)
+  const [theme, setTheme] = useState<Theme>(() => readStoredTheme() ?? readSystemTheme())
 
   useEffect(() => {
-    const selected = interfaceProfiles.find((item) => item.id === profile)
     const root = document.documentElement
+    root.dataset.theme = theme
+    root.style.colorScheme = theme
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', THEME_COLOR[theme])
+  }, [theme])
 
-    root.dataset.profile = profile
-    root.classList.toggle('dark', selected?.dark ?? true)
-    root.classList.toggle('light', !(selected?.dark ?? true))
-    root.style.colorScheme = selected?.dark ? 'dark' : 'light'
-    window.localStorage.setItem(STORAGE_KEY, profile)
-
-    const themeMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
-    themeMeta?.setAttribute('content', selected?.dark ? '#000000' : '#f2f0e9')
-  }, [profile])
-
-  const setProfile = useCallback((nextProfile: InterfaceProfile) => {
-    setProfileState(nextProfile)
+  useEffect(() => {
+    const media = window.matchMedia(DARK_QUERY)
+    const followSystem = () => {
+      if (!readStoredTheme()) setTheme(readSystemTheme())
+    }
+    media.addEventListener('change', followSystem)
+    return () => media.removeEventListener('change', followSystem)
   }, [])
 
-  return { profile, setProfile }
+  const toggleTheme = useCallback(() => {
+    const next: Theme = theme === 'dark' ? 'light' : 'dark'
+    storeTheme(next)
+    setTheme(next)
+  }, [theme])
+
+  return { theme, toggleTheme }
 }
