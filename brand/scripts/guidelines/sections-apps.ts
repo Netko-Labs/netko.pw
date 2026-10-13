@@ -1,9 +1,7 @@
 import { PALETTE } from '../tokens';
 import { lockup, mark, pixelMark, sectionHead } from './art';
 import { TAGLINE } from './sections-identity';
-import { BANNERS, toHtml } from '../ascii';
-
-const [BANNER, SPLASH] = BANNERS;
+import { BANNER, toHtml } from '../ascii';
 
 const asciiBlock = (html: string, label: string, isLight = false) => `
   <figure class="ascii-figure${isLight ? ' is-light' : ''}">
@@ -19,7 +17,7 @@ const KIT = [
   { path: 'kit/favicon/favicon-{16,32,48}.png · .ico', note: 'pixel cut on a sumi tile' },
   { path: 'kit/favicon/apple-touch-icon.png · icon-512.png', note: 'vector mark on sumi' },
   { path: 'kit/social/og-card.png', note: '1200 × 630 link preview' },
-  { path: 'kit/cli/{banner,splash}.{ansi,txt}', note: 'truecolor ANSI + plain text banners' },
+  { path: 'kit/cli/banner.{ansi,txt}', note: 'truecolor ANSI + plain text banner' },
   { path: 'kit/social/github-avatar.png', note: '500 × 500 org avatar' },
   { path: 'fonts/*.woff2', note: 'Departure Mono, M PLUS Rounded 1c (OFL)' },
   { path: 'scripts/build-guidelines.ts', note: 'regenerates all of the above' },
@@ -45,15 +43,14 @@ export const appsSection = (ogCardDataUri: string) => `
     <h3>Browser tab</h3>
     <div class="grid cols-2">${browserTab(false)}${browserTab(true)}</div>
 
-    <h3>CLI banners</h3>
+    <h3>CLI banner</h3>
     <p class="lede">Half-block text art (<code>▀ ▄ █</code>) generated from the same pixel grids as the favicon and wordmark, so the cat in the terminal is the cat in the logo. Each character cell holds two square pixels. The body uses the terminal’s own foreground color, so it works on light and dark themes. Only the eye is truecolor sakura.</p>
-    ${asciiBlock(toHtml(SPLASH.build('color')), `splash · ${SPLASH.use}`)}
     <div class="grid cols-2">
       ${asciiBlock(toHtml(BANNER.build('color')), `banner · ${BANNER.use}`)}
       ${asciiBlock(toHtml(BANNER.build('color')), 'banner · light terminal theme', true)}
     </div>
     ${asciiBlock(toHtml(BANNER.build('plain')), 'banner · plain, no color support: the eye becomes a cut-out, like the mono mark')}
-    <pre class="term" style="margin-top:16px"><span class="p">$</span> cat brand/kit/cli/splash.ansi</pre>
+    <pre class="term" style="margin-top:16px"><span class="p">$</span> cat brand/kit/cli/banner.ansi</pre>
 
     <h3>Link preview</h3>
     <img src="${ogCardDataUri}" alt="Netko link preview card" style="width:100%;border-radius:6px;display:block">

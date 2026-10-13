@@ -1,4 +1,4 @@
-import { FAVICON_MAP, SPLASH_MAP } from './pixel-maps';
+import { FAVICON_MAP } from './pixel-maps';
 import { BRAND, PALETTE } from './tokens';
 import type { AsciiBanner, AsciiCell, AsciiMode, AsciiText } from './types';
 import { wordmarkGrid } from './wordmark';
@@ -52,41 +52,22 @@ const compose = (cat: string[], gap: number, wordmarkY: number, texts: AsciiText
   return lines;
 };
 
-export const BANNERS: AsciiBanner[] = [
-  {
-    key: 'banner',
-    name: 'Banner',
-    use: 'Printed when a CLI starts. 7 lines, fits 80 columns.',
-    build: (mode) =>
-      compose(
-        FAVICON_MAP.slice(0, 14),
-        3,
-        2,
-        [
-          { row: 5, text: BRAND.tagline },
-          { row: 6, text: META, color: PALETTE.fog },
-        ],
-        mode,
-      ),
-  },
-  {
-    key: 'splash',
-    name: 'Splash',
-    use: 'First run, --version, and READMEs. 14 lines, built from the 32px pixel cut.',
-    build: (mode) =>
-      compose(
-        SPLASH_MAP,
-        4,
-        8,
-        [
-          { row: 9, text: 'Open-source tools,' },
-          { row: 10, text: 'hacked together with LLMs.' },
-          { row: 12, text: META, color: PALETTE.fog },
-        ],
-        mode,
-      ),
-  },
-];
+export const BANNER: AsciiBanner = {
+  key: 'banner',
+  name: 'Banner',
+  use: 'CLI start, --version and READMEs. 7 lines, fits 80 columns.',
+  build: (mode) =>
+    compose(
+      FAVICON_MAP.slice(0, 14),
+      3,
+      2,
+      [
+        { row: 5, text: BRAND.tagline },
+        { row: 6, text: META, color: PALETTE.fog },
+      ],
+      mode,
+    ),
+};
 
 const rgb = (hex: string) => [1, 3, 5].map((i) => Number.parseInt(hex.slice(i, i + 2), 16)).join(';');
 

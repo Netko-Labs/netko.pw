@@ -1,7 +1,7 @@
 import { mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { Resvg } from '@resvg/resvg-js';
-import { BANNERS, toAnsi, toPlain } from './ascii';
+import { BANNER, toAnsi, toPlain } from './ascii';
 import { renderMark } from './marks';
 import { EXPRESSIONS, renderPixelMark, TERM } from './term';
 import { PALETTE } from './tokens';
@@ -56,10 +56,8 @@ export const buildKit = async (kitDir: string) => {
   await Promise.all(dirs.map((d) => mkdir(d, { recursive: true })));
   const [logoDir, expressionDir, faviconDir, socialDir, cliDir] = dirs;
 
-  for (const banner of BANNERS) {
-    await Bun.write(join(cliDir, `${banner.key}.ansi`), `${toAnsi(banner.build('color'))}\n`);
-    await Bun.write(join(cliDir, `${banner.key}.txt`), `${toPlain(banner.build('plain'))}\n`);
-  }
+  await Bun.write(join(cliDir, 'banner.ansi'), `${toAnsi(BANNER.build('color'))}\n`);
+  await Bun.write(join(cliDir, 'banner.txt'), `${toPlain(BANNER.build('plain'))}\n`);
 
   for (const variant of VARIANTS) {
     for (const tone of TONES) {
