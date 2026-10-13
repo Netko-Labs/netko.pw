@@ -190,6 +190,7 @@ export interface StickerPosition {
 
 export interface HoloStickerProps {
   sticker: StickerTool
+  repo?: RepoData
 }
 
 export interface GachaMachineProps {
@@ -246,6 +247,7 @@ export interface PixelBoxProps {
 export interface PixelKeyProps {
   label: string
   isPressed: boolean
+  isLit?: boolean
   onPress: (label: string) => void
 }
 
@@ -255,5 +257,5 @@ export interface PixelBubbleProps {
 }
 
 export interface PixelConfettiProps {
-  burstKey: number
+  isActive: boolean
 }

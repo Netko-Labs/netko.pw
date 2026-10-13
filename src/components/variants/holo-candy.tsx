@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react'
+import { type CSSProperties, useState } from 'react'
 import { PixelMark } from '@/components/site'
 import type { PixelConfettiProps } from '@/types'
 import { PixelSprite } from './pixel-kit'
@@ -21,14 +21,19 @@ const spread = (index: number) => {
   } as CSSProperties
 }
 
-export function PixelConfetti({ burstKey }: PixelConfettiProps) {
-  if (burstKey === 0) return null
+export function PixelConfetti({ isActive }: PixelConfettiProps) {
+  const [isDone, setIsDone] = useState(false)
+  if (!isActive || isDone) return null
   return (
-    <div aria-hidden className="pointer-events-none absolute top-1/2 left-1/2" key={burstKey}>
+    <div
+      aria-hidden
+      className="pointer-events-none absolute top-1/2 left-1/2"
+      onAnimationEnd={() => setIsDone(true)}
+    >
       {Array.from({ length: BITS }, (_, index) => (
         <PixelSprite
           className={`confetti-bit absolute ${COLORS[index % COLORS.length]}`}
-          key={`${burstKey}-${index}`}
+          key={`bit-${index}`}
           rows={SPARKLE_SPRITE}
           scale={index % 3 === 0 ? 4 : 3}
           style={spread(index)}

@@ -9,7 +9,7 @@ const NAV_LINKS = [
 ]
 
 export function ThemeToggle({ theme, onToggle }: ThemeToggleProps) {
-  const next = theme === 'dark' ? 'kami' : 'sumi'
+  const next = theme === 'dark' ? 'light' : 'dark'
   return (
     <button
       aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}

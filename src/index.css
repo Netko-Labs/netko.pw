@@ -24,6 +24,13 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Fredoka";
+  src: url("./generated/fonts/Fredoka-600.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
 :root {
   --bg: var(--kami);
   --fg: var(--sumi);
@@ -271,6 +278,7 @@
 }
 
 .holo-page {
+  --card-outline: var(--sumi);
   --holo-outline: var(--sumi);
   --holo-key: #ffffff;
   --holo-key-ink: var(--sumi);
@@ -278,6 +286,21 @@
   --holo-muted: color-mix(in oklab, var(--sumi) 70%, transparent);
   color: var(--sumi);
   background: linear-gradient(#d8e8ff, var(--kami) 640px);
+}
+
+.holo-page :focus-visible {
+  outline: 2px solid var(--sumi);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px #ffffff;
+}
+
+[data-theme="dark"] .holo-page :focus-visible {
+  outline-color: var(--kami);
+  box-shadow: 0 0 0 5px var(--sumi);
+}
+
+.holo-page a:has(> .pixel-outline, > .pixel-lift) {
+  display: inline-block;
 }
 
 [data-theme="dark"] .holo-page {
@@ -305,6 +328,10 @@
   --ry: 0deg;
   transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
   transition: transform 0.15s ease-out;
+}
+
+[data-theme="dark"] .holo-page .holo-tilt {
+  --card-outline: var(--sticker);
 }
 
 .holo-shine {
@@ -335,13 +362,24 @@
   opacity: 0.85;
 }
 
-.holo-shine::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.1;
-  background-image: repeating-linear-gradient(transparent 0 3px, rgb(255 255 255 / 0.9) 3px 4px);
+@media (hover: none) {
+  .is-seen .holo-shine::after {
+    animation: holo-sweep 1.8s ease-out 0.2s 1 both;
+  }
+}
+
+@keyframes holo-sweep {
+  0% {
+    opacity: 0;
+    background-position: 0% 50%;
+  }
+  40% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    background-position: 100% 50%;
+  }
 }
 
 .dither-edge {
@@ -368,6 +406,23 @@
   }
 }
 
+.hover-sparkle {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.hover-sparkle .twinkle {
+  animation-play-state: paused;
+}
+
+.holo-tilt:hover .hover-sparkle {
+  opacity: 1;
+}
+
+.holo-tilt:hover .hover-sparkle .twinkle {
+  animation-play-state: running;
+}
+
 .drift {
   animation: drift 40s linear infinite alternate;
 }
@@ -380,7 +435,7 @@
 
 .holo-text {
   background-size: 200% 100%;
-  animation: holo-text 7s ease-in-out infinite alternate;
+  animation: holo-text 3.5s ease-in-out 2 alternate both;
 }
 
 @keyframes holo-text {

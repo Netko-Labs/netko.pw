@@ -60,7 +60,7 @@ export function PixelBox({
   )
 }
 
-export function PixelKey({ label, isPressed, onPress }: PixelKeyProps) {
+export function PixelKey({ label, isPressed, isLit, onPress }: PixelKeyProps) {
   return (
     <button
       aria-label={`Press ${label}`}
@@ -70,7 +70,11 @@ export function PixelKey({ label, isPressed, onPress }: PixelKeyProps) {
     >
       <PixelBox
         innerClassName={`grid size-12 place-items-center font-mono text-[22px] min-[400px]:size-14 sm:size-[4.5rem] sm:text-[33px] ${
-          isPressed ? 'bg-sakura text-sumi' : 'bg-[var(--holo-key)] text-[var(--holo-key-ink)]'
+          isPressed
+            ? 'bg-sakura text-sumi'
+            : isLit
+              ? 'bg-matcha text-sumi'
+              : 'bg-[var(--holo-key)] text-[var(--holo-key-ink)]'
         }`}
         innerStyle={{ '--s': '5px' } as CSSProperties}
         isLifted={!isPressed}
@@ -85,7 +89,7 @@ export function PixelBubble({ text, isLarge }: PixelBubbleProps) {
   return (
     <PixelBox
       className="relative"
-      innerClassName={`bg-[var(--holo-key)] font-mono text-[var(--holo-key-ink)] ${isLarge ? 'px-3 py-1 text-[22px]' : 'px-2.5 py-1.5 text-[11px]'}`}
+      innerClassName={`bg-[var(--holo-key)] font-mono text-[var(--holo-key-ink)] ${isLarge ? 'px-2.5 py-1.5 text-[11px] sm:px-3 sm:py-1 sm:text-[22px]' : 'px-2.5 py-1.5 text-[11px]'}`}
       innerStyle={{ '--s': '4px' } as CSSProperties}
     >
       {text}

@@ -62,7 +62,7 @@ export const FEATURED_TOOLS: FeaturedTool[] = [
 export const STATUS_LABEL: Record<ToolStatus, string> = {
   'open-source': 'open source',
   live: 'live',
-  building: 'in the lab',
+  building: 'in development',
 }
 
 export const FEATURED_REPOS = new Set(

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { BrandMark, GITHUB_ORG_URL, ThemeToggle } from '@/components/site'
 import { useGoogleFonts } from '@/hooks/use-google-fonts'
 import type { GachaMachineProps, VariantProps } from '@/types'
@@ -71,12 +71,16 @@ function GachaMachine({ isDropping, onTurn }: GachaMachineProps) {
 
 export function StickerGachaVariant({ data, theme, onToggleTheme }: VariantProps) {
   useGoogleFonts(FREDOKA_FONTS)
-  const { pressed, press, typedCount, face, isBlinking } = useCatKeyboard()
+  const { pressed, press, completions, face, isBlinking } = useCatKeyboard()
   const { collected, latest, isDropping, isSoldOut, turn, collectAll } = useGacha(STICKERS.length)
 
+  const handledCompletions = useRef(0)
+
   useEffect(() => {
-    if (typedCount > 0 && typedCount % KEYS.length === 0) turn()
-  }, [typedCount, turn])
+    if (completions <= handledCompletions.current) return
+    handledCompletions.current = completions
+    turn()
+  }, [completions, turn])
 
   const prize = latest === null ? null : STICKERS[latest]
 

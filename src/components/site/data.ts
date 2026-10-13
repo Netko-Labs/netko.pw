@@ -8,7 +8,7 @@ export const PRINCIPLES = [
   },
   {
     name: 'playful',
-    line: 'Fun is the reason we start. The cat walks across the keyboard sometimes, and we keep the good typos.',
+    line: 'Fun is why we start. Tested is when we ship.',
   },
   {
     name: 'precise',
