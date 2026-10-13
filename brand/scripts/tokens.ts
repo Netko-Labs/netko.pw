@@ -7,6 +7,12 @@ export const PALETTE = {
   matcha: '#7FCB6F',
 } as const;
 
+export const BRAND = {
+  tagline: 'Open-source tools, hacked together with LLMs.',
+  version: 'v0.1',
+  url: 'https://netko.pw',
+} as const;
+
 export const TONE_FG = {
   ink: PALETTE.sumi,
   paper: PALETTE.kami,

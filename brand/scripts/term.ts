@@ -1,4 +1,5 @@
 import { ear } from './marks';
+import { FAVICON_MAP } from './pixel-maps';
 import { PALETTE, TONE_FG } from './tokens';
 import type { Expression, MarkParts, MarkTone, MarkVariant } from './types';
 
@@ -77,24 +78,6 @@ export const EXPRESSIONS: Expression[] = [
   },
 ];
 
-const FAVICON_MAP = [
-  '................',
-  '.##..........##.',
-  '.###........###.',
-  '.####......####.',
-  '.##############.',
-  '.##############.',
-  '.##f######aaa##.',
-  '.###f#####a#a##.',
-  '.##f###f##aaa##.',
-  '.##############.',
-  '.##############.',
-  '.##############.',
-  '...####.........',
-  '...##...........',
-  '................',
-  '................',
-];
 
 const runs = (row: string, glyph: string) =>
   [...row.matchAll(new RegExp(`${glyph}+`, 'g'))].map((m) => ({ x: m.index, w: m[0].length }));

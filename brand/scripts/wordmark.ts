@@ -18,6 +18,11 @@ const TRACKING = 1;
 
 export const WORDMARK_COLS = WORD.length * GLYPH_COLS + (WORD.length - 1) * TRACKING;
 
+export const wordmarkGrid = () =>
+  Array.from({ length: GLYPH_ROWS }, (_, y) =>
+    [...WORD].map((char) => GLYPHS[char][y]).join('.'.repeat(TRACKING)),
+  );
+
 const wordmarkPath = (unit: number, originX: number, originY: number) =>
   [...WORD]
     .flatMap((char, index) =>

@@ -68,3 +68,24 @@ export interface ContrastPair {
   fg: PaletteKey;
   bg: PaletteKey;
 }
+
+export type AsciiMode = 'color' | 'plain';
+
+export interface AsciiCell {
+  char: string;
+  fg?: string;
+  bg?: string;
+}
+
+export interface AsciiText {
+  row: number;
+  text: string;
+  color?: string;
+}
+
+export interface AsciiBanner {
+  key: string;
+  name: string;
+  use: string;
+  build: (mode: AsciiMode) => AsciiCell[][];
+}

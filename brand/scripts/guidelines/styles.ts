@@ -82,6 +82,12 @@ pre.term { background: var(--sumi); color: var(--kami); border-radius: var(--edg
 pre.term .p { color: var(--sakura); }
 pre.term .m { color: var(--fog); }
 pre.term .ok { color: var(--matcha); }
+.ascii-figure { margin-top: 16px; min-width: 0; }
+.ascii { --ink: var(--kami); background: var(--sumi); color: var(--ink); border-radius: var(--edge); padding: 28px 32px; font: calc(110px / 7) var(--mono); line-height: 2ch; letter-spacing: 0; overflow-x: auto; }
+.ascii .px { display: inline-block; width: 1ch; height: 2ch; vertical-align: top; color: transparent; }
+.ascii .px::selection { color: inherit; }
+.is-light .ascii { --ink: var(--sumi); background: #fff; box-shadow: inset 0 0 0 1px rgb(27 23 36 / .1); }
+.ascii-figure .caption { margin-top: 8px; }
 .mock { border-radius: var(--edge); overflow: hidden; background: #fff; }
 .kit { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 32px; margin-top: 16px; font-size: 15px; }
 .kit code { font-size: 14px; }

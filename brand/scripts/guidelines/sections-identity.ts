@@ -1,6 +1,7 @@
+import { BRAND } from '../tokens';
 import { lockup, mark, sectionHead } from './art';
 
-export const TAGLINE = 'Open-source tools, hacked together with LLMs.';
+export const TAGLINE = BRAND.tagline;
 
 export const heroSection = () => `
   <header class="hero">
