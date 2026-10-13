@@ -8,7 +8,7 @@ const NAV_LINKS = [
   { label: 'repos', href: toHash(ANCHOR.repos) },
 ]
 
-function ThemeToggle({ theme, onToggle }: ThemeToggleProps) {
+export function ThemeToggle({ theme, onToggle }: ThemeToggleProps) {
   const next = theme === 'dark' ? 'kami' : 'sumi'
   return (
     <button

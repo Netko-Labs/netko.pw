@@ -1,7 +1,8 @@
 import { trackEvent } from '@/hooks/use-umami'
 import { timeAgo } from '@/lib/format'
-import type { FeaturedTool, StatusBadgeProps, ToolCardProps, ToolLink } from '@/types'
-import { GITHUB_ORG_URL, STATUS_LABEL } from './featured'
+import type { StatusBadgeProps, ToolCardProps } from '@/types'
+import { toolLinks } from './data'
+import { STATUS_LABEL } from './featured'
 
 const STATUS_DOT = {
   'open-source': 'bg-matcha',
@@ -9,15 +10,7 @@ const STATUS_DOT = {
   building: 'bg-fog',
 } as const
 
-function toolLinks(tool: FeaturedTool): ToolLink[] {
-  return [
-    tool.repo ? { label: 'github', href: `${GITHUB_ORG_URL}/${tool.repo}`, kind: 'repo' } : null,
-    tool.site ? { label: tool.site.replace('https://', ''), href: tool.site, kind: 'site' } : null,
-    tool.docs ? { label: 'docs', href: tool.docs, kind: 'docs' } : null,
-  ].filter((link): link is ToolLink => link !== null)
-}
-
-function StatusBadge({ status }: StatusBadgeProps) {
+export function StatusBadge({ status }: StatusBadgeProps) {
   return (
     <span className="flex shrink-0 items-center gap-1.5 font-mono text-muted text-xs">
       <span className={`size-2 ${STATUS_DOT[status]}`} />

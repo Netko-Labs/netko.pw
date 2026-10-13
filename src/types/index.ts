@@ -143,3 +143,77 @@ export interface SectionHeadProps {
   title: string
   lede: string
 }
+
+export interface VariantProps {
+  data: GitHubData
+  isLoading: boolean
+  hasError: boolean
+  theme: Theme
+  onToggleTheme: () => void
+  expression: ExpressionKey
+}
+
+export interface VariantMeta {
+  id: number
+  name: string
+}
+
+export interface VariantSwitcherProps {
+  current: number
+  variants: VariantMeta[]
+}
+
+export interface FlapCounterProps {
+  label: string
+  value: number
+}
+
+export interface TickerProps {
+  repos: RepoData[]
+}
+
+export interface IdeFile {
+  path: string
+  label: string
+  depth: number
+}
+
+export interface TerminalLine {
+  id: number
+  kind: 'input' | 'output'
+  text: string
+}
+
+export interface IdeTerminalProps {
+  files: IdeFile[]
+  onOpen: (path: string) => void
+  onPet: () => void
+  onToggleTheme: () => void
+}
+
+export interface IdePaneProps {
+  path: string
+  data: GitHubData
+  expression: ExpressionKey
+}
+
+export type ChatTopic = 'intro' | 'tools' | 'code' | 'how' | 'cat' | 'unknown'
+
+export interface ChatMessage {
+  id: number
+  from: 'term' | 'visitor'
+  topic: ChatTopic
+  text: string
+}
+
+export interface ChatReplyProps {
+  topic: ChatTopic
+  data: GitHubData
+}
+
+export interface BuildingFloor {
+  level: string
+  room: string
+  scene: string
+  tool: FeaturedTool
+}

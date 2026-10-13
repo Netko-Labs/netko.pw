@@ -20,3 +20,7 @@ export function timeAgo(iso: string, now = Date.now()) {
 export function latestPush(isoDates: string[]) {
   return isoDates.reduce((latest, iso) => (iso > latest ? iso : latest), '')
 }
+
+export function daysSince(iso: string, now = Date.now()) {
+  return Math.max(0, Math.floor((now - Date.parse(iso)) / 86_400_000))
+}

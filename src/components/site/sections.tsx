@@ -1,27 +1,12 @@
 import { timeAgo } from '@/lib/format'
 import type { RepoListProps, ToolsSectionProps } from '@/types'
 import { ANCHOR } from './anchors'
-import { FEATURED_REPOS, FEATURED_TOOLS, HIDDEN_REPOS } from './featured'
+import { otherRepos, PRINCIPLES, repoFor } from './data'
+import { FEATURED_TOOLS } from './featured'
 import { SectionHead } from './section-head'
 import { ToolCard } from './tool-card'
 
-const PRINCIPLES = [
-  {
-    name: 'curious',
-    line: 'We poke at models to see what they really do, then build the tool we wished existed.',
-  },
-  {
-    name: 'playful',
-    line: 'Fun is the reason we start. The cat walks across the keyboard sometimes, and we keep the good typos.',
-  },
-  {
-    name: 'precise',
-    line: 'Fun is no excuse for flaky. Typed end to end, documented, shipped one commit at a time.',
-  },
-]
-
 export function ToolsSection({ repos }: ToolsSectionProps) {
-  const repoByName = new Map(repos.map((repo) => [repo.name.toLowerCase(), repo]))
   return (
     <section className="mx-auto max-w-6xl scroll-mt-20 px-5 py-20 sm:px-8" id={ANCHOR.tools}>
       <SectionHead
@@ -31,11 +16,7 @@ export function ToolsSection({ repos }: ToolsSectionProps) {
       />
       <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {FEATURED_TOOLS.map((tool) => (
-          <ToolCard
-            key={tool.name}
-            repo={tool.repo ? repoByName.get(tool.repo.toLowerCase()) : undefined}
-            tool={tool}
-          />
+          <ToolCard key={tool.name} repo={repoFor(tool, repos)} tool={tool} />
         ))}
       </div>
     </section>
@@ -43,11 +24,7 @@ export function ToolsSection({ repos }: ToolsSectionProps) {
 }
 
 export function RepoList({ repos }: RepoListProps) {
-  const rest = repos
-    .filter((repo) => !repo.fork && !repo.archived)
-    .filter((repo) => !FEATURED_REPOS.has(repo.name.toLowerCase()))
-    .filter((repo) => !HIDDEN_REPOS.has(repo.name))
-    .sort((a, b) => b.pushedAt.localeCompare(a.pushedAt))
+  const rest = otherRepos(repos)
 
   return (
     <section className="mx-auto max-w-6xl scroll-mt-20 px-5 py-20 sm:px-8" id={ANCHOR.repos}>
