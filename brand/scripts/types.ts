@@ -11,13 +11,31 @@ export interface MarkParts {
 
 export interface Concept {
   key: string;
-  letter: string;
+  label: string;
   name: string;
   thesis: string;
   readsAs: string;
   risk: string;
   parts: MarkParts;
+  isAccentBlinking?: boolean;
 }
+
+export interface SheetSection {
+  heading?: string;
+  concepts: Concept[];
+}
+
+export interface SheetSpec {
+  slug: string;
+  eyebrow: string;
+  title: string;
+  lede: string;
+  sections: SheetSection[];
+  recommended?: string[];
+  next: string;
+}
+
+export type SheetFonts = Record<'display' | 'body' | 'bodyBold', string>;
 
 export interface MarkRequest {
   concept: Concept;
