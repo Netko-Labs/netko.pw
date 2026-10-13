@@ -87,7 +87,7 @@ export function HoloSticker({ sticker, repo }: HoloStickerProps) {
             links.map((link) => (
               <a
                 aria-label={`${tool.name} ${LINK_NOUN[link.kind]}`}
-                className="inline-flex min-h-10 items-center bg-white px-3 font-mono text-[11px] text-sumi hover:bg-sumi hover:text-white dark:bg-[var(--sticker)] dark:hover:bg-kami"
+                className="inline-flex min-h-10 items-center bg-white px-3 font-mono text-[11px] text-sumi hover:bg-sumi hover:text-white focus-visible:bg-sumi focus-visible:text-white dark:bg-[var(--sticker)] dark:focus-visible:bg-sumi dark:focus-visible:text-[var(--sticker)] dark:hover:bg-sumi dark:hover:text-[var(--sticker)]"
                 href={link.href}
                 key={link.kind}
               >
