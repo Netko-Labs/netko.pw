@@ -91,43 +91,9 @@ export interface PixelMarkProps {
   className?: string
 }
 
-export interface WordmarkProps {
-  width: number
-  className?: string
-}
-
-export interface HeroProps {
-  expression: ExpressionKey
-}
-
-export interface StatusStripProps {
-  data: GitHubData
-  isLoading: boolean
-  hasError: boolean
-  toolCount: number
-}
-
-export interface ToolCardProps {
-  tool: FeaturedTool
-  repo?: RepoData
-}
-
-export interface ToolsSectionProps {
-  repos: RepoData[]
-}
-
-export interface RepoListProps {
-  repos: RepoData[]
-}
-
 export interface ThemeToggleProps {
   theme: Theme
   onToggle: () => void
-}
-
-export interface SiteHeaderProps {
-  theme: Theme
-  onToggleTheme: () => void
 }
 
 export interface RawMarkupProps {
@@ -136,33 +102,10 @@ export interface RawMarkupProps {
   as?: 'span' | 'pre'
 }
 
-export interface StatusBadgeProps {
-  status: ToolStatus
-}
-
-export interface SectionHeadProps {
-  path: string
-  title: string
-  lede: string
-}
-
-export interface VariantProps {
+export interface HoloPageProps {
   data: GitHubData
-  isLoading: boolean
-  hasError: boolean
   theme: Theme
   onToggleTheme: () => void
-  expression: ExpressionKey
-}
-
-export interface VariantMeta {
-  id: string
-  name: string
-}
-
-export interface VariantSwitcherProps {
-  current: string
-  variants: VariantMeta[]
 }
 
 export interface StickerTool {
@@ -171,60 +114,9 @@ export interface StickerTool {
   tilt: number
 }
 
-export interface KeyboardKeyProps {
-  label: string
-  isPressed: boolean
-  onPress: (label: string) => void
-  className?: string
-}
-
-export interface StickerBodyProps {
-  sticker: StickerTool
-  isCompact?: boolean
-}
-
-export interface StickerPosition {
-  x: number
-  y: number
-}
-
 export interface HoloStickerProps {
   sticker: StickerTool
   repo?: RepoData
-}
-
-export interface GachaMachineProps {
-  isDropping: boolean
-  onTurn: () => void
-}
-
-export interface SparkleProps {
-  className: string
-}
-
-export interface StickerDrag {
-  index: number
-  pointerX: number
-  pointerY: number
-  origin: StickerPosition
-  hasMoved: boolean
-}
-
-export interface ClubExtrasProps {
-  repos: RepoData[]
-}
-
-export interface StickerDetailProps {
-  sticker: StickerTool
-}
-
-export interface DoodleProps {
-  className?: string
-}
-
-export interface WashiTapeProps {
-  color: string
-  className?: string
 }
 
 export interface PixelSpriteProps {

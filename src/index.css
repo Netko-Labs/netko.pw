@@ -104,53 +104,6 @@
   }
 }
 
-.caret {
-  display: inline-block;
-  width: 0.5em;
-  height: 0.95em;
-  margin-left: 0.08em;
-  vertical-align: -0.1em;
-  background: var(--sakura);
-}
-
-.caret.is-idle {
-  animation: caret 1.1s steps(1) infinite;
-}
-
-@keyframes caret {
-  50% {
-    opacity: 0;
-  }
-}
-
-/* Each block cell is an exact 1ch × 2ch box; 110px / 7 makes Departure Mono's ch a whole 10px. */
-.ascii {
-  --ink: var(--kami);
-  overflow-x: auto;
-  border-radius: var(--radius-brand);
-  background: var(--sumi);
-  padding: 24px 28px;
-  color: var(--ink);
-  font: calc(110px / 7) var(--font-mono);
-  line-height: 2ch;
-  letter-spacing: 0;
-}
-
-@media (max-width: 640px) {
-  .ascii {
-    padding: 14px;
-    font-size: calc(55px / 7);
-  }
-}
-
-.ascii .px {
-  display: inline-block;
-  width: 1ch;
-  height: 2ch;
-  vertical-align: top;
-  color: transparent;
-}
-
 .skip-link {
   position: absolute;
   left: 12px;
@@ -172,60 +125,7 @@
     scroll-behavior: auto;
   }
 
-  .is-blinking .cursor,
-  .caret.is-idle {
-    animation: none;
-  }
-}
-
-@keyframes gacha-drop {
-  0% {
-    transform: translate(-50%, 0) scale(0.6);
-    opacity: 0;
-  }
-  15% {
-    opacity: 1;
-  }
-  70% {
-    transform: translate(-50%, 230px) scale(1);
-  }
-  85% {
-    transform: translate(-50%, 214px) scale(1);
-  }
-  100% {
-    transform: translate(-50%, 230px) scale(1);
-  }
-}
-
-@keyframes gacha-pop {
-  from {
-    transform: scale(0.4) rotate(-12deg);
-    opacity: 0;
-  }
-}
-
-@keyframes gacha-wobble {
-  50% {
-    transform: rotate(4deg);
-  }
-}
-
-.gacha-drop {
-  animation: gacha-drop 0.9s cubic-bezier(0.5, 0, 0.7, 1) forwards;
-}
-
-.gacha-pop {
-  animation: gacha-pop 0.45s cubic-bezier(0.3, 1.6, 0.6, 1) both;
-}
-
-.gacha-wobble:hover {
-  animation: gacha-wobble 0.4s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .gacha-drop,
-  .gacha-pop,
-  .gacha-wobble:hover {
+  .is-blinking .cursor {
     animation: none;
   }
 }

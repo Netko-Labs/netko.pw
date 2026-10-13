@@ -1,7 +1,7 @@
 import { useId } from 'react'
-import { EXPRESSION_SVG, INK, MARK_UID, PIXEL_MARK_SVG, WORDMARK } from '@/generated/brand-art'
+import { EXPRESSION_SVG, INK, MARK_UID, PIXEL_MARK_SVG } from '@/generated/brand-art'
 import { cn } from '@/lib/utils'
-import type { BrandMarkProps, PixelMarkProps, WordmarkProps } from '@/types'
+import type { BrandMarkProps, PixelMarkProps } from '@/types'
 import { RawMarkup } from './raw-markup'
 
 const themeable = (svg: string) => svg.replaceAll(INK, 'currentColor')
@@ -27,16 +27,6 @@ export function PixelMark({ size, className }: PixelMarkProps) {
     <RawMarkup
       className={cn('brand-art', className)}
       html={themeable(withSize(PIXEL_MARK_SVG, size, size))}
-    />
-  )
-}
-
-export function Wordmark({ width, className }: WordmarkProps) {
-  const height = Math.round((WORDMARK.height * width) / WORDMARK.width)
-  return (
-    <RawMarkup
-      className={cn('brand-art', className)}
-      html={themeable(withSize(WORDMARK.svg, width, height))}
     />
   )
 }

@@ -1,7 +1,0 @@
-export { StickerCandyVariant } from './sticker-candy'
-export { StickerClubVariant } from './sticker-club'
-export { StickerGachaVariant } from './sticker-gacha'
-export { StickerHoloVariant } from './sticker-holo'
-export { StickerLaptopVariant } from './sticker-laptop'
-export { StickerScrapbookVariant } from './sticker-scrapbook'
-export { VariantSwitcher } from './variant-switcher'

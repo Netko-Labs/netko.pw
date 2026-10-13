@@ -15,7 +15,7 @@ bun run deploy   # Build and deploy to Cloudflare Workers
 
 ## Deploy
 
-Cloudflare Workers static assets, no Worker script. `wrangler.jsonc` serves `dist/` with SPA fallback; `public/_headers` sets security headers and immutable caching for hashed `/assets/*`. Workers Builds: build command `bun run build`, deploy command `bunx wrangler deploy`.
+Cloudflare Workers static assets, no Worker script. `wrangler.jsonc` serves `dist/` with SPA fallback on the `netko.dev` and `www.netko.dev` custom domains; `public/_headers` sets security headers and immutable caching for hashed `/assets/*`. Workers Builds: build command `bun run build`, deploy command `bunx wrangler deploy`.
 
 ## Brand
 
@@ -35,19 +35,25 @@ This is a React SPA for the Netko organization landing page, built with:
 ```
 src/
 ├── components/
-│   ├── landing-page.tsx       # Page composition: header → hero → status → tools → repos → principles → footer
-│   ├── site/                  # netko.dev sections (barrel: index.ts)
-│   │   ├── brand-art.tsx      # BrandMark / PixelMark / Wordmark from src/generated/brand-art.ts
+│   ├── landing-page.tsx       # Wires theme + GitHub data into HoloPage
+│   ├── holo/                  # The netko.dev page (barrel: index.ts)
+│   │   ├── holo-page.tsx      # Composition: header → hero → tools → how we build → other repos → footer
+│   │   ├── holo-hero.tsx      # Headline, CTAs, mascot + N E T K O keyboard game
+│   │   ├── holo-sticker.tsx   # Tool card with pointer tilt + holo shine
+│   │   ├── pixel-kit.tsx      # PixelSprite / PixelBox / PixelKey / PixelBubble
+│   │   └── ...                # holo-candy (confetti, walker, stars), pixel-sprites, sticker-keyboard, sticker-kit
+│   ├── site/                  # Shared data + brand (barrel: index.ts)
+│   │   ├── brand-art.tsx      # BrandMark / PixelMark from src/generated/brand-art.ts
 │   │   ├── raw-markup.tsx     # The one place generated brand markup is injected
 │   │   ├── featured.ts        # Curated tools (FEATURED_TOOLS), status labels, org URL
-│   │   ├── anchors.ts         # Section ids shared by nav links and sections
-│   │   └── ...                # hero, site-header, status-strip, tool-card, sections, site-footer
+│   │   ├── anchors.ts         # Section ids shared by links and sections
+│   │   └── ...                # data (repo helpers, principles), site-header (ThemeToggle)
 │   └── ui/                    # shadcn primitives (currently unused)
 ├── generated/                 # Synced from brand-assets: brand.css, brand-art.ts, fonts/ (never edit)
-├── hooks/                     # use-github-data, use-theme (system + toggle), use-typewriter, use-umami
-├── lib/                       # cn(), timeAgo()
+├── hooks/                     # use-github-data, use-theme (system + toggle), use-seen-once
+├── lib/                       # cn()
 ├── types/index.ts             # All shared types
-└── index.css                  # Tailwind v4 theme on top of the brand palette
+└── index.css                  # Tailwind v4 theme, pixel frames, holo effects, on top of the brand palette
 ```
 
 ### Key Patterns
@@ -61,7 +67,7 @@ import type { RepoData } from '@/types'
 
 **Theme:** `data-theme="light|dark"` on `<html>`, set before paint by the inline script in `index.html` and kept in sync by `useTheme`. Semantic tokens (`bg`, `fg`, `surface`, `line`, `muted`) live in `src/index.css`; raw palette vars come from `src/generated/brand.css`. Sakura is never text on kami (2.72:1), only graphics.
 
-**Animations:** CSS only (blink, caret, typewriter hook). Always respect `prefers-reduced-motion`.
+**Animations:** CSS only (blink, holo shine, confetti, walker); JS only sets CSS vars for card tilt. Always respect `prefers-reduced-motion`.
 
 ## Code Style Rules
 

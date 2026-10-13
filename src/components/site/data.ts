@@ -1,4 +1,4 @@
-import type { FeaturedTool, GitHubData, RepoData, ToolLink } from '@/types'
+import type { FeaturedTool, RepoData, ToolLink } from '@/types'
 import { FEATURED_REPOS, GITHUB_ORG_URL, HIDDEN_REPOS } from './featured'
 
 export const PRINCIPLES = [
@@ -36,10 +36,4 @@ export function toolLinks(tool: FeaturedTool): ToolLink[] {
     tool.site ? { label: tool.site.replace('https://', ''), href: tool.site, kind: 'site' } : null,
     tool.docs ? { label: 'docs', href: tool.docs, kind: 'docs' } : null,
   ].filter((link): link is ToolLink => link !== null)
-}
-
-export function recentActivity(data: GitHubData) {
-  return [...data.repos]
-    .filter((repo) => !HIDDEN_REPOS.has(repo.name))
-    .sort((a, b) => b.pushedAt.localeCompare(a.pushedAt))
 }

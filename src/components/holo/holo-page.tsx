@@ -10,7 +10,7 @@ import {
   ThemeToggle,
   toHash,
 } from '@/components/site'
-import type { VariantProps } from '@/types'
+import type { HoloPageProps } from '@/types'
 import { PixelWalker } from './holo-candy'
 import { HoloHero } from './holo-hero'
 import { HoloSticker } from './holo-sticker'
@@ -21,7 +21,7 @@ import { FREDOKA, PRINCIPLE_FACES, STICKERS } from './sticker-kit'
 const SECTION = 'mx-auto max-w-6xl px-5'
 const pixelStep = (px: number) => ({ '--s': `${px}px` }) as CSSProperties
 
-export function StickerHoloVariant({ data, theme, onToggleTheme }: VariantProps) {
+export function HoloPage({ data, theme, onToggleTheme }: HoloPageProps) {
   return (
     <div className="holo-page min-h-dvh overflow-hidden" id={ANCHOR.top}>
       <a className="skip-link" href={toHash(ANCHOR.main)}>

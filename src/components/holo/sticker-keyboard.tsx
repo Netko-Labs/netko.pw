@@ -1,26 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import type { ExpressionKey, KeyboardKeyProps } from '@/types'
+import type { ExpressionKey } from '@/types'
 
 const PRESS_MS = 220
 const TYPING_TAGS = new Set(['INPUT', 'TEXTAREA', 'SELECT'])
 
 export const KEYS = ['N', 'E', 'T', 'K', 'O']
-
-export function KeyboardKey({ label, isPressed, onPress, className = '' }: KeyboardKeyProps) {
-  return (
-    <button
-      aria-label={`Press ${label}`}
-      className={`grid size-14 place-items-center rounded-2xl border-[3px] text-2xl transition-all sm:size-20 sm:text-4xl ${
-        isPressed ? 'translate-y-1.5 shadow-none' : 'shadow-[0_6px_0_currentColor]'
-      } ${className}`}
-      onClick={() => onPress(label)}
-      style={{ fontFamily: "'Fredoka', sans-serif", fontWeight: 600 }}
-      type="button"
-    >
-      {label}
-    </button>
-  )
-}
 
 function isTypingTarget(target: EventTarget | null) {
   return (
