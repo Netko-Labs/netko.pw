@@ -4,7 +4,7 @@ import type { PixelBoxProps, PixelBubbleProps, PixelKeyProps, PixelSpriteProps }
 
 const FILL: Record<string, string> = { '#': 'currentColor', a: PALETTE.sakura, w: '#FFFFFF' }
 
-export function PixelSprite({ rows, scale, className, label }: PixelSpriteProps) {
+export function PixelSprite({ rows, scale, className, label, style }: PixelSpriteProps) {
   const width = rows[0].length
   const runs = rows.flatMap((row, y) =>
     [...row.matchAll(/(#+|a+|w+)/g)].map((match) => ({
@@ -22,6 +22,7 @@ export function PixelSprite({ rows, scale, className, label }: PixelSpriteProps)
       height={rows.length * scale}
       role={label ? 'img' : undefined}
       shapeRendering="crispEdges"
+      style={style}
       viewBox={`0 0 ${width} ${rows.length}`}
       width={width * scale}
     >
@@ -68,7 +69,7 @@ export function PixelKey({ label, isPressed, onPress }: PixelKeyProps) {
       type="button"
     >
       <PixelBox
-        innerClassName={`grid size-14 place-items-center font-mono text-2xl sm:size-[4.5rem] sm:text-3xl ${
+        innerClassName={`grid size-12 place-items-center font-mono text-[22px] min-[400px]:size-14 sm:size-[4.5rem] sm:text-[33px] ${
           isPressed ? 'bg-sakura text-sumi' : 'bg-[var(--holo-key)] text-[var(--holo-key-ink)]'
         }`}
         innerStyle={{ '--s': '5px' } as CSSProperties}
@@ -80,11 +81,11 @@ export function PixelKey({ label, isPressed, onPress }: PixelKeyProps) {
   )
 }
 
-export function PixelBubble({ text }: PixelBubbleProps) {
+export function PixelBubble({ text, isLarge }: PixelBubbleProps) {
   return (
     <PixelBox
       className="relative"
-      innerClassName="bg-[var(--holo-key)] px-3 py-1.5 font-mono text-[var(--holo-key-ink)] text-sm"
+      innerClassName={`bg-[var(--holo-key)] font-mono text-[var(--holo-key-ink)] ${isLarge ? 'px-3 py-1 text-[22px]' : 'px-2.5 py-1.5 text-[11px]'}`}
       innerStyle={{ '--s': '4px' } as CSSProperties}
     >
       {text}

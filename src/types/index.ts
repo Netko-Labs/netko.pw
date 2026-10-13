@@ -231,6 +231,7 @@ export interface PixelSpriteProps {
   scale: number
   className?: string
   label?: string
+  style?: CSSProperties
 }
 
 export interface PixelBoxProps {
@@ -250,4 +251,9 @@ export interface PixelKeyProps {
 
 export interface PixelBubbleProps {
   text: string
+  isLarge?: boolean
+}
+
+export interface PixelConfettiProps {
+  burstKey: number
 }
