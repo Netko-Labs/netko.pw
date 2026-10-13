@@ -1,38 +1,47 @@
-import { useCallback } from 'react'
-import { AsciiExperience } from '@/components/landing/ascii/ascii-experience'
-import type { DesignLayoutProps } from '@/components/landing/designs/design-layout-props'
 import { useGitHubData } from '@/hooks/use-github-data'
 import { useTheme } from '@/hooks/use-theme'
-import type { InterfaceProfile } from '@/types'
+import type { ExpressionKey } from '@/types'
+import {
+  FEATURED_TOOLS,
+  Hero,
+  Principles,
+  RepoList,
+  SiteFooter,
+  SiteHeader,
+  StatusStrip,
+  ToolsSection,
+} from './site'
+import { ANCHOR, toHash } from './site/anchors'
 
-function DesignLayout(props: DesignLayoutProps) {
-  return <AsciiExperience {...props} />
+function heroExpression(isLoading: boolean, hasError: boolean): ExpressionKey {
+  if (isLoading) return 'loading'
+  return hasError ? 'sleep' : 'idle'
 }
 
 export function LandingPage() {
-  const { profile, setProfile } = useTheme()
-  const { githubData, mainContributor, loading, error } = useGitHubData()
-
-  const handleProfileChange = useCallback(
-    (nextProfile: InterfaceProfile) => {
-      setProfile(nextProfile)
-    },
-    [setProfile],
-  )
+  const { theme, toggleTheme } = useTheme()
+  const { githubData, loading, error } = useGitHubData()
+  const hasError = Boolean(error)
 
   return (
-    <div className="design-root" data-design={profile} id="top">
-      <a className="skip-link" href="#main-content">
+    <div className="min-h-dvh" id={ANCHOR.top}>
+      <a className="skip-link" href={toHash(ANCHOR.main)}>
         Skip to content
       </a>
-      <DesignLayout
-        contributor={mainContributor}
-        error={error}
-        githubData={githubData}
-        loading={loading}
-        onProfileChange={handleProfileChange}
-        profile={profile}
-      />
+      <SiteHeader onToggleTheme={toggleTheme} theme={theme} />
+      <main id={ANCHOR.main}>
+        <Hero expression={heroExpression(loading, hasError)} />
+        <StatusStrip
+          data={githubData}
+          hasError={hasError}
+          isLoading={loading}
+          toolCount={FEATURED_TOOLS.length}
+        />
+        <ToolsSection repos={githubData.repos} />
+        <RepoList repos={githubData.repos} />
+        <Principles />
+      </main>
+      <SiteFooter />
     </div>
   )
 }
