@@ -34,7 +34,10 @@
     <!-- Applies the saved or system theme before first paint to avoid a flash. -->
     <script>
       ;(() => {
-        const stored = localStorage.getItem('netko-theme')
+        let stored = null
+        try {
+          stored = localStorage.getItem('netko-theme')
+        } catch {}
         const theme =
           stored === 'light' || stored === 'dark'
             ? stored

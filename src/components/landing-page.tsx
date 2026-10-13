@@ -1,6 +1,6 @@
+import { HoloPage } from '@/components/holo'
 import { useGitHubData } from '@/hooks/use-github-data'
 import { useTheme } from '@/hooks/use-theme'
-import { HoloPage } from './holo'
 
 export function LandingPage() {
   const { theme, toggleTheme } = useTheme()

@@ -7,8 +7,20 @@ const DARK_QUERY = '(prefers-color-scheme: dark)'
 const THEME_COLOR: Record<Theme, string> = { light: PALETTE.kami, dark: PALETTE.sumi }
 
 function readStoredTheme(): Theme | null {
-  const stored = window.localStorage.getItem(STORAGE_KEY)
-  return stored === 'light' || stored === 'dark' ? stored : null
+  try {
+    const stored = window.localStorage.getItem(STORAGE_KEY)
+    return stored === 'light' || stored === 'dark' ? stored : null
+  } catch {
+    return null
+  }
+}
+
+function storeTheme(theme: Theme) {
+  try {
+    window.localStorage.setItem(STORAGE_KEY, theme)
+  } catch {
+    // Storage blocked: the toggle still works, it just won't persist.
+  }
 }
 
 function readSystemTheme(): Theme {
@@ -36,7 +48,7 @@ export function useTheme() {
 
   const toggleTheme = useCallback(() => {
     const next: Theme = theme === 'dark' ? 'light' : 'dark'
-    window.localStorage.setItem(STORAGE_KEY, next)
+    storeTheme(next)
     setTheme(next)
   }, [theme])
 
