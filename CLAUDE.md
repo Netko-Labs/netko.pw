@@ -15,7 +15,7 @@ bun run deploy   # Build and deploy to Cloudflare Workers
 
 ## Deploy
 
-Cloudflare Workers static assets, no Worker script. `wrangler.jsonc` serves `dist/` with SPA fallback on the `netko.dev` and `www.netko.dev` custom domains; `public/_headers` sets security headers and immutable caching for hashed `/assets/*`. Workers Builds: build command `bun run build`, deploy command `bunx wrangler deploy`.
+Cloudflare Workers static assets, no Worker script. `wrangler.jsonc` serves `dist/` with SPA fallback on the `netko.dev` and `www.netko.dev` custom domains; `public/_headers` sets security headers and immutable caching for hashed `/assets/*`. `.github/workflows/deploy.yml` builds every PR and deploys on push to `main` (secret `CLOUDFLARE_API_TOKEN`, variable `CLOUDFLARE_ACCOUNT_ID`); `bun run deploy` is the manual fallback.
 
 ## Brand
 
