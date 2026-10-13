@@ -25,8 +25,18 @@
     "noUncheckedSideEffectImports": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@brand/*": ["./brand/scripts/*"]
     }
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "brand/scripts/ascii.ts",
+    "brand/scripts/marks.ts",
+    "brand/scripts/pixel-maps.ts",
+    "brand/scripts/term.ts",
+    "brand/scripts/tokens.ts",
+    "brand/scripts/types.ts",
+    "brand/scripts/wordmark.ts"
+  ]
 }

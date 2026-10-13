@@ -1,9 +1,10 @@
 import { mkdir } from 'node:fs/promises'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
 import { OG_SIZE, renderOgCard } from './guidelines/og'
 import { renderGuidelines } from './guidelines/page'
 import { buildKit } from './kit'
 import { BRAND_DIR, loadFonts, screenshot } from './render'
+import { syncSite } from './site-sync'
 
 const GUIDE_DIR = join(BRAND_DIR, 'guidelines')
 const KIT_DIR = join(BRAND_DIR, 'kit')
@@ -24,6 +25,8 @@ const main = async () => {
   await screenshot(`file://${pagePath}`, join(GUIDE_DIR, 'preview.png'), '1440,900')
   console.log(`✓ kit → ${KIT_DIR}${hasIco ? '' : ' (no favicon.ico: magick missing)'}`)
   console.log(`✓ guidelines → ${pagePath}`)
+  const publicDir = await syncSite(BRAND_DIR, resolve(BRAND_DIR, '..'))
+  console.log(`✓ site assets → ${publicDir}, src/generated/brand.css`)
 }
 
 await main()

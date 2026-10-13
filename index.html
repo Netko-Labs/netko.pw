@@ -1,42 +1,50 @@
 <!doctype html>
-<html lang="en" class="dark" data-profile="void">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Primary Meta Tags -->
-    <title>Netko Labs — Small Tools. Sharp Edges.</title>
-    <meta name="title" content="Netko Labs — Small Tools. Sharp Edges." />
-    <meta name="description" content="Netko Labs builds open-source developer tools for desktop apps, local infrastructure, data, and the strange machinery in between." />
-    <meta name="keywords" content="open source, developer tools, Mirin, Anko, Mizu, Bun, TypeScript, Rust, desktop apps" />
-    <meta name="author" content="Netko" />
-    <meta name="theme-color" content="#000000" />
+    <title>netko — open-source tools, hacked together with LLMs</title>
+    <meta name="description" content="Netko is an open-source lab. We hack on LLMs for fun and ship the tools that come out of it: mirin, CodeWhiskers, Anko, Washi, mizu and nukk." />
+    <meta name="author" content="Netko Labs" />
+    <meta name="theme-color" content="#F1EEF8" />
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://netko.dev/" />
-    <meta property="og:title" content="Netko Labs — Small Tools. Sharp Edges." />
-    <meta property="og:description" content="Open-source developer tools for desktop apps, local infrastructure, data, and the strange machinery in between." />
-    <meta property="og:image" content="https://netko.dev/logo-cat-white-bg.png" />
+    <meta property="og:title" content="netko — open-source tools, hacked together with LLMs" />
+    <meta property="og:description" content="An open-source lab hacking on LLMs and shipping the tools that come out of it." />
+    <meta property="og:image" content="https://netko.dev/og-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://netko.dev/" />
-    <meta property="twitter:title" content="Netko Labs — Small Tools. Sharp Edges." />
-    <meta property="twitter:description" content="Open-source developer tools for desktop apps, local infrastructure, data, and the strange machinery in between." />
-    <meta property="twitter:image" content="https://netko.dev/logo-cat-white-bg.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="netko — open-source tools, hacked together with LLMs" />
+    <meta name="twitter:description" content="An open-source lab hacking on LLMs and shipping the tools that come out of it." />
+    <meta name="twitter:image" content="https://netko.dev/og-card.png" />
 
     <link rel="canonical" href="https://netko.dev/" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon-cat.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <!-- Preconnect to external resources -->
     <link rel="preconnect" href="https://api.github.com" />
-    <link rel="dns-prefetch" href="https://api.github.com" />
+
+    <!-- Applies the saved or system theme before first paint to avoid a flash. -->
+    <script>
+      ;(() => {
+        const stored = localStorage.getItem('netko-theme')
+        const theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light'
+        document.documentElement.dataset.theme = theme
+        document.documentElement.style.colorScheme = theme
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>
