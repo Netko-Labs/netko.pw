@@ -9,7 +9,13 @@ bun run dev      # Start dev server (Vite)
 bun run build    # Type-check and build for production
 bun run lint     # Run ESLint
 bun run preview  # Preview production build
+bun run cf:dev   # Build and serve dist/ through workerd (local Workers runtime)
+bun run deploy   # Build and deploy to Cloudflare Workers
 ```
+
+## Deploy
+
+Cloudflare Workers static assets, no Worker script. `wrangler.jsonc` serves `dist/` with SPA fallback; `public/_headers` sets security headers and immutable caching for hashed `/assets/*`. Workers Builds: build command `bun run build`, deploy command `bunx wrangler deploy`.
 
 ## Brand
 
