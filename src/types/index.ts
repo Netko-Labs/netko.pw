@@ -1,3 +1,5 @@
+import type { CSSProperties, ReactNode } from 'react'
+
 export interface RepoData {
   name: string
   description: string | null
@@ -222,4 +224,30 @@ export interface DoodleProps {
 export interface WashiTapeProps {
   color: string
   className?: string
+}
+
+export interface PixelSpriteProps {
+  rows: string[]
+  scale: number
+  className?: string
+  label?: string
+}
+
+export interface PixelBoxProps {
+  children: ReactNode
+  className?: string
+  innerClassName?: string
+  style?: CSSProperties
+  innerStyle?: CSSProperties
+  isLifted?: boolean
+}
+
+export interface PixelKeyProps {
+  label: string
+  isPressed: boolean
+  onPress: (label: string) => void
+}
+
+export interface PixelBubbleProps {
+  text: string
 }
